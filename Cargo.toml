@@ -1,0 +1,2 @@
+[workspace]
+members = ["chapter03-0", "chapter03-1"]
