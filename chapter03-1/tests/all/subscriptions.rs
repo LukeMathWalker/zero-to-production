@@ -4,7 +4,7 @@ use serde_json::json;
 #[actix_rt::test]
 async fn subscribe_works() {
     // Arrange
-    let address = spawn_app();
+    let address = spawn_app().await;
     let client = reqwest::Client::new();
     let payload = json!({
         "email": "myemail@mydomain.com",

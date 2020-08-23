@@ -3,7 +3,7 @@ use crate::helpers::spawn_app;
 #[actix_rt::test]
 async fn health_check_works() {
     // Arrange
-    let address = spawn_app();
+    let address = spawn_app().await;
     let client = reqwest::Client::new();
 
     // Act
