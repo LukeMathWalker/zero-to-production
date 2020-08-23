@@ -1,4 +1,3 @@
-#![allow(clippy::toplevel_ref_arg)]
 use actix_web::{web, HttpResponse};
 use chrono::Utc;
 use sqlx::PgPool;
