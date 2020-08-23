@@ -57,7 +57,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           env:
-            - SQLX_OFFLINE: true
+            SQLX_OFFLINE: true
           command: clippy
           args: -- -D warnings
 
