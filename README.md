@@ -13,4 +13,4 @@ Alternatively, from the top-level folder, you can specify the binary you are int
 ```bash
 # Run the application as it is at end of the first part of Chapter 3
 cargo run --bin chapter03-0
-``
+```
