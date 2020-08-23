@@ -1,5 +1,5 @@
 -- Create Subscriptions Table
-CREATE TABLE events(
+CREATE TABLE subscriptions(
    id uuid NOT NULL,
    PRIMARY KEY (id),
    email TEXT NOT NULL UNIQUE,
