@@ -1,4 +1,3 @@
-#![allow(clippy::toplevel_ref_arg)]
 use anyhow::Context;
 use chapter03_1::configuration::get_configuration;
 use chapter03_1::startup::run;

@@ -22,7 +22,7 @@ jobs:
           toolchain: stable
           override: true
       - name: Migrate database
-        run: SKIP_DOCKER=true sudo apt-get install libpq-dev -y && cargo install sqlx && ./chapter03-1/scripts/init_db.sh
+        run: SKIP_DOCKER=true sudo apt-get install libpq-dev -y && cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres && ./chapter03-1/scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: test
@@ -56,6 +56,8 @@ jobs:
       - run: rustup component add clippy
       - uses: actions-rs/cargo@v1
         with:
+          env:
+            - SQLX_OFFLINE: true
           command: clippy
           args: -- -D warnings
 
