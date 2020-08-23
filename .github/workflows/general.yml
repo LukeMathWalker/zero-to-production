@@ -55,9 +55,9 @@ jobs:
           override: true
       - run: rustup component add clippy
       - uses: actions-rs/cargo@v1
+        env:
+          SQLX_OFFLINE: true
         with:
-          env:
-            SQLX_OFFLINE: true
           command: clippy
           args: -- -D warnings
 
