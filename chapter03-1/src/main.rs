@@ -1,4 +1,4 @@
-use chapter03_1::run;
+use chapter03_1::startup::run;
 use std::net::TcpListener;
 
 #[actix_rt::main]
