@@ -21,6 +21,8 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+      - name: Migrate database
+        run: SKIP_DOCKER=true sudo apt-get install libpq-dev -y && ./chapter03-1/scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: test
