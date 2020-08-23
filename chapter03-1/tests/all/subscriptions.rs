@@ -6,14 +6,15 @@ async fn subscribe_works() {
     // Arrange
     let app = spawn_app().await;
     let client = reqwest::Client::new();
+    let email = "myemail@mydomain.com";
+    let name = "my name";
     let payload = json!({
-        "email": "myemail@mydomain.com",
-        "name": "my name"
+        "email": email,
+        "name": name
     });
 
     // Act
     let response = client
-        // Use the returned application address
         .post(&format!("{}/subscriptions", &app.address))
         .json(&payload)
         .send()
@@ -22,4 +23,12 @@ async fn subscribe_works() {
 
     // Assert
     assert!(response.status().is_success());
+
+    let saved = sqlx::query!("SELECT email, name FROM subscriptions",)
+        .fetch_one(&app.db_pool)
+        .await
+        .expect("Failed to fetch saved subscription.");
+
+    assert_eq!(saved.email, email);
+    assert_eq!(saved.name, name);
 }
