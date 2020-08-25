@@ -10,7 +10,7 @@ pub struct SubscribeRequest {
 }
 
 pub async fn subscribe(
-    payload: web::Json<SubscribeRequest>,
+    payload: web::Form<SubscribeRequest>,
     pool: web::Data<PgPool>,
 ) -> Result<HttpResponse, HttpResponse> {
     sqlx::query!(
