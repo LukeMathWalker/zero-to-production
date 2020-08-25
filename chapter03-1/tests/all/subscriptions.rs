@@ -76,6 +76,11 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
             .expect("Failed to execute request.");
 
         // Assert
-        assert_eq!(400, response.status().as_u16());
+        assert_eq!(
+            400,
+            response.status().as_u16(),
+            "The API did not fail with 400 Bad Request when '{}' was passed as input.",
+            invalid_body
+        );
     }
 }
