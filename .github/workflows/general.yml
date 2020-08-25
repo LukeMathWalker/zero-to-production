@@ -9,6 +9,11 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -16,6 +21,11 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
+      - name: Migrate database
+        run: |
+          sudo apt-get install libpq-dev -y
+          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: test
@@ -39,6 +49,11 @@ jobs:
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -47,6 +62,11 @@ jobs:
           toolchain: stable
           override: true
       - run: rustup component add clippy
+      - name: Migrate database
+        run: |
+          sudo apt-get install libpq-dev -y
+          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: clippy
@@ -55,6 +75,11 @@ jobs:
   coverage:
     name: Code coverage
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -64,6 +89,12 @@ jobs:
         with:
           toolchain: stable
           override: true
+
+      - name: Migrate database
+        run: |
+          sudo apt-get install libpq-dev -y
+          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
 
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
