@@ -50,7 +50,7 @@ async fn subscribe_accepts_valid_form_data() {
         .expect("Failed to execute request.");
 
     // Assert
-    assert!(response.status().is_success());
+    assert!(200, response.status().as_u16());
 }
 
 #[actix_rt::test]
@@ -58,16 +58,13 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
     // Arrange
     let app = spawn_app().await;
     let client = reqwest::Client::new();
-    let invalid_bodies = vec![
-        // Missing email
-        "name=le%20guin",
-        // Missing name
-        "email=ursula_le_guin%40gmail.com",
-        // Missing both name and email
-        ""
+    let test_cases = vec![
+        ("name=le%20guin", "missing the email"),
+        ("email=ursula_le_guin%40gmail.com", "missing the name"),
+        ("", "missing both name and email")
     ];
 
-    for invalid_body in invalid_bodies {
+    for (invalid_body, error_message) in test_cases {
         // Act
         let response = client
             .post(&format!("{}/subscriptions", &app.address))
@@ -81,8 +78,9 @@ async fn subscribe_returns_a_400_when_data_is_missing() {
         assert_eq!(
             400,
             response.status().as_u16(),
-            "The API did not fail with 400 Bad Request when '{}' was passed as input.",
-            invalid_body
+            // Additional customised error message on test failure
+            "The API did not fail with 400 Bad Request when the payload was {}.",
+            error_message
         );
     }
 }
