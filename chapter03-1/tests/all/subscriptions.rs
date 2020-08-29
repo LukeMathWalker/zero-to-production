@@ -50,7 +50,7 @@ async fn subscribe_accepts_valid_form_data() {
         .expect("Failed to execute request.");
 
     // Assert
-    assert!(200, response.status().as_u16());
+    assert_eq!(200, response.status().as_u16());
 }
 
 #[actix_rt::test]
