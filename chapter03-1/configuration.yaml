@@ -1,3 +1,4 @@
+application_port: 8000
 database:
   host: "localhost"
   port: 5432
