@@ -11,7 +11,7 @@ async fn main() -> Result<(), anyhow::Error> {
         .await
         .map_err(anyhow::Error::from)
         .with_context(|| "Failed to connect to Postgres.")?;
-    let address = format!("127.0.0.1:{}", configuration.application_port);
+    let address = format!("0.0.0.0:{}", configuration.application_port);
     let listener = TcpListener::bind(address)?;
     run(listener, connection_pool)?.await?;
     Ok(())
