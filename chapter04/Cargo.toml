@@ -1,0 +1,27 @@
+[package]
+name = "chapter04"
+version = "0.1.0"
+authors = ["LukeMathWalker <rust@lpalmieri.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "chapter04"
+
+[dependencies]
+actix-web = "2.0.0"
+actix-rt = "1.1.1"
+tokio = "0.2.22"
+serde = "1.0.115"
+config = { version = "0.10.1", default-features = false, features = ["yaml"] }
+sqlx = { version = "0.4.0-beta.1", default-features = false, features = [ "runtime-tokio", "macros", "postgres", "uuid", "chrono", "migrate"] }
+anyhow = "1.0.32"
+uuid = { version = "0.8.1", features = ["v4"] }
+chrono = "0.4.15"
+
+[dev-dependencies]
+reqwest = { version = "0.10.7", features = ["json"] }
