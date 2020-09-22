@@ -22,6 +22,7 @@ sqlx = { version = "0.4.0-beta.1", default-features = false, features = [ "runti
 anyhow = "1.0.32"
 uuid = { version = "0.8.1", features = ["v4"] }
 chrono = "0.4.15"
+env_logger = "0.7.1"
 
 [dev-dependencies]
 reqwest = { version = "0.10.7", features = ["json"] }

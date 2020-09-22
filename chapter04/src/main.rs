@@ -3,9 +3,14 @@ use chapter04::configuration::get_configuration;
 use chapter04::startup::run;
 use sqlx::postgres::PgPool;
 use std::net::TcpListener;
+use env_logger::Env;
 
 #[actix_rt::main]
 async fn main() -> Result<(), anyhow::Error> {
+    // `init` does call `log::set_logger`, so this is all we need to do
+    // We are falling back to printing all logs at info-level or above
+    // if the RUST_LOG environment variable has not been set
+    env_logger::from_env(Env::default().default_filter_or("info")).init();
     let configuration = get_configuration().expect("Failed to read configuration.");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
         .await
