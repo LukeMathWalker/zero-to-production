@@ -1,6 +1,6 @@
 # Zero To Production / Code
 
-![Book cover](https://www.zero2prod.com/assets/img/book2.png)
+<div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://static-2.gumroad.com/res/gumroad/3629854790655/asset_previews/bc9026cad3ece1746327c1d70218f602/retina/rsz_zero_to_production_punk.png" /></a></div>
 
 [Zero To Production In Rust](https://zero2prod.com) aims to be an opinionated introduction to backend development using Rust.
 
