@@ -2,7 +2,7 @@
 
 <div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://static-2.gumroad.com/res/gumroad/3629854790655/asset_previews/bc9026cad3ece1746327c1d70218f602/retina/rsz_zero_to_production_punk.png" /></a></div>
 
-[Zero To Production In Rust](https://zero2prod.com) aims to be an opinionated introduction to backend development using Rust.
+[Zero To Production In Rust](https://zero2prod.com) is an opinionated introduction to backend development using Rust.
 
 This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
 
