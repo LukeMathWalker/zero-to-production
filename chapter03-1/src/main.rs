@@ -1,16 +1,14 @@
-use anyhow::Context;
 use chapter03_1::configuration::get_configuration;
 use chapter03_1::startup::run;
 use sqlx::postgres::PgPool;
 use std::net::TcpListener;
 
 #[actix_rt::main]
-async fn main() -> Result<(), anyhow::Error> {
+async fn main() -> std::io::Result<()> {
     let configuration = get_configuration().expect("Failed to read configuration.");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
         .await
-        .map_err(anyhow::Error::from)
-        .with_context(|| "Failed to connect to Postgres.")?;
+        .expect("Failed to connect to Postgres.");
 
     // Here we choose to bind explicitly to localhost, 127.0.0.1, for security
     // reasons. This binding may cause issues in some environments. For example,
