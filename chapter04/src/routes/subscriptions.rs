@@ -4,7 +4,7 @@ use sqlx::PgPool;
 use uuid::Uuid;
 
 #[derive(serde::Deserialize)]
-pub struct SubscribeRequest {
+pub struct FormData {
     email: String,
     name: String,
 }
@@ -18,7 +18,7 @@ pub struct SubscribeRequest {
     )
 )]
 pub async fn subscribe(
-    payload: web::Form<SubscribeRequest>,
+    payload: web::Form<FormData>,
     pool: web::Data<PgPool>,
 ) -> Result<HttpResponse, HttpResponse> {
     insert_subscriber(&pool, &payload)
@@ -31,10 +31,7 @@ pub async fn subscribe(
     name = "Saving new subscriber details in the database",
     skip(payload, pool)
 )]
-pub async fn insert_subscriber(
-    pool: &PgPool,
-    payload: &SubscribeRequest,
-) -> Result<(), sqlx::Error> {
+pub async fn insert_subscriber(pool: &PgPool, payload: &FormData) -> Result<(), sqlx::Error> {
     sqlx::query!(
         r#"
     INSERT INTO subscriptions (id, email, name, subscribed_at)

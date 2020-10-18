@@ -4,13 +4,13 @@ use sqlx::PgPool;
 use uuid::Uuid;
 
 #[derive(serde::Deserialize)]
-pub struct SubscribeRequest {
+pub struct FormData {
     email: String,
     name: String,
 }
 
 pub async fn subscribe(
-    payload: web::Form<SubscribeRequest>,
+    payload: web::Form<FormData>,
     pool: web::Data<PgPool>,
 ) -> Result<HttpResponse, HttpResponse> {
     sqlx::query!(
