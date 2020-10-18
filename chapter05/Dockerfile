@@ -26,5 +26,8 @@ FROM rust:1.47 as runtime
 WORKDIR /bin
 # Let's copy our compiled binary from the builder environment to our runtime environment
 COPY --from=builder /app/target/release/chapter05 ./zero2prod
+# We need the configuration file at runtime!
+COPY configuration.yaml .
+
 # When `docker run` is executed, launch the binary!
 ENTRYPOINT ["./zero2prod"]
