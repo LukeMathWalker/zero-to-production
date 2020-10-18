@@ -22,8 +22,6 @@ sqlx = { version = "0.4.0-beta.1", default-features = false, features = [ "runti
 anyhow = "1.0.32"
 uuid = { version = "0.8.1", features = ["v4"] }
 chrono = "0.4.15"
-env_logger = "0.7.1"
-log = "0.4.11"
 tracing = "0.1.19"
 tracing-futures = "0.2.4"
 tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }
