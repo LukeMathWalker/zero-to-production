@@ -13,7 +13,7 @@ path = "src/main.rs"
 name = "chapter03-0"
 
 [dependencies]
-actix-web = "2.0.0"
+actix-web = "3.0.0"
 actix-rt = "1.1.1"
 tokio = "0.2.22"
 
