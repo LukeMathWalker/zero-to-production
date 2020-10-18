@@ -10,7 +10,7 @@ pub struct FormData {
 }
 
 pub async fn subscribe(
-    payload: web::Form<FormData>,
+    form: web::Form<FormData>,
     pool: web::Data<PgPool>,
 ) -> Result<HttpResponse, HttpResponse> {
     sqlx::query!(
@@ -19,8 +19,8 @@ pub async fn subscribe(
     VALUES ($1, $2, $3, $4)
             "#,
         Uuid::new_v4(),
-        payload.email,
-        payload.name,
+        form.email,
+        form.name,
         Utc::now()
     )
     .execute(pool.as_ref())
