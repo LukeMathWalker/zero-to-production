@@ -1,3 +1,7 @@
 .env
 target/
 deploy/
+tests/
+Dockerfile
+scripts/
+migrations/
