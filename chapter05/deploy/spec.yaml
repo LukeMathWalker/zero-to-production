@@ -18,7 +18,7 @@ services:
       http_path: /health_check
     # The port the application will be listening on for incoming requests
     # It should match what we specify in our configuration.yaml file!
-    http_port: 8080
+    http_port: 8000
     # For production workloads we'd go for at least two!
     instance_count: 1
     # Let's keep the bill lean for now...
