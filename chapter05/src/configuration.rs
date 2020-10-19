@@ -50,7 +50,7 @@ pub fn get_configuration() -> Result<Settings, config::ConfigError> {
 
     // Add in settings from environment variables (with a prefix of APP and '__' as separator)
     // E.g. `APP_APPLICATION__PORT=5001 would set `Settings.application.port`
-    s.merge(config::Environment::with_prefix("app").separator("__"))?;
+    settings.merge(config::Environment::with_prefix("app").separator("__"))?;
 
     settings.try_into()
 }
