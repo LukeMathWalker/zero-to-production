@@ -27,6 +27,7 @@ tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"]
 tracing-bunyan-formatter = "0.1.6"
 tracing-log = "0.1.1"
 tracing-actix-web = "0.2.0"
+serde-aux = "1.0.1"
 
 [dev-dependencies]
 reqwest = { version = "0.10.7", features = ["json"] }
