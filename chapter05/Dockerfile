@@ -15,7 +15,7 @@ COPY . app
 WORKDIR app
 # Let's build our binary!
 # We'll use the release profile to make it faaaast
-RUN cargo build --release
+RUN cargo build
 
 # Runtime stage
 # We use again the latest stable release as base image
@@ -25,7 +25,7 @@ FROM rust:1.47 as runtime
 # Where runnable binaries are usually stored in Linux
 WORKDIR /bin
 # Let's copy our compiled binary from the builder environment to our runtime environment
-COPY --from=builder /app/target/release/chapter05 ./zero2prod
+COPY --from=builder /app/target/debug/chapter05 ./zero2prod
 # We need the configuration file at runtime!
 COPY configuration.yaml .
 
