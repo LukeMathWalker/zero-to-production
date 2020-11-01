@@ -42,9 +42,6 @@ services:
       - key: APP_DATABASE__DATABASE_NAME
         scope: RUN_TIME
         value: ${newsletter.DATABASE}
-      - key: APP_DATABASE__REQUIRE_SSL
-        scope: RUN_TIME
-        value: "true"
 databases:
   # PG = Postgres
   - engine: PG
