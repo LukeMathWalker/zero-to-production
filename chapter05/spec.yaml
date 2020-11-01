@@ -1,0 +1,54 @@
+name: zero2prod
+# See https://www.digitalocean.com/docs/app-platform/#regional-availability for the available options
+# You can get region slugs from https://www.digitalocean.com/docs/platform/availability-matrix/
+# `fra` stands for Frankfurt (Germany - EU)
+region: fra
+services:
+  - name: zero2prod
+    # Relative to the repository root
+    dockerfile_path: chapter05/Dockerfile
+    source_dir: chapter05
+    github:
+      branch: ch-05
+      deploy_on_push: true
+      repo: LukeMathWalker/zero-to-production
+    # Active probe used by DigitalOcean's to ensure our application is healthy
+    health_check:
+      # The path to our health check endpoint! It turned out to be useful in the end!
+      http_path: /health_check
+    # The port the application will be listening on for incoming requests
+    # It should match what we specify in our configuration.yaml file!
+    http_port: 8000
+    # For production workloads we'd go for at least two!
+    instance_count: 1
+    # Let's keep the bill lean for now...
+    instance_size_slug: basic-xxs
+    # All incoming requests should be routed to our app
+    routes:
+      - path: /
+    envs:
+      - key: APP_DATABASE__USERNAME
+        scope: RUN_TIME
+        value: ${newsletter.USERNAME}
+      - key: APP_DATABASE__PASSWORD
+        scope: RUN_TIME
+        value: ${newsletter.PASSWORD}
+      - key: APP_DATABASE__HOST
+        scope: RUN_TIME
+        value: ${newsletter.HOSTNAME}
+      - key: APP_DATABASE__PORT
+        scope: RUN_TIME
+        value: ${newsletter.PORT}
+      - key: APP_DATABASE__DATABASE_NAME
+        scope: RUN_TIME
+        value: ${newsletter.DATABASE}
+databases:
+  # PG = Postgres
+  - engine: PG
+    # Database name
+    name: newsletter
+    # Again, let's keep the bill lean
+    num_nodes: 1
+    size: db-s-dev-database
+    # Postgres version - using the latest here
+    version: "12"
