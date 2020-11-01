@@ -1,33 +1,33 @@
-# We are going to use a multi-stage Docker build.
-# Once we have a compiled binary there is no need to keep around source codes or
-# any of the intermediate artifacts required to generate it.
-# We'll use a "builder stage" to get to the binary and then copy it over to our
-# "runner stage", the one we'll use as runtime when the Docker image is launched!
-
-# Builder stage
-# We use the latest stable release as base image
-FROM rust:1.47 as builder
-
-# Copy all files from our working environment to our Docker build context
-# We'll put them inside the `app` folder (which will be created if it does not exist)
-COPY . app
-# Let's switch our working directory to `app` (equivalent to `cd app`)
+FROM rust:1.47 as planner
 WORKDIR app
-# Let's build our binary!
-# We'll use the release profile to make it faaaast
-RUN cargo build
+# We only pay the installation cost once,
+# it will be cached from the second build onwards
+# To ensure a reproducible build consider pinning
+# the cargo-chef version with `--version X.X.X`
+RUN cargo install cargo-chef
+COPY . .
+# Compute a lock-like file for our project
+RUN cargo chef prepare  --recipe-path recipe.json
 
-# Runtime stage
-# We use again the latest stable release as base image
-FROM rust:1.47 as runtime
+FROM rust:1.47 as cacher
+WORKDIR app
+RUN cargo install cargo-chef
+COPY --from=planner /app/recipe.json recipe.json
+# Build our project dependencies, not our application!
+RUN cargo chef cook --release --recipe-path recipe.json
 
-# Set our working directory to the `/bin` folder
-# Where runnable binaries are usually stored in Linux
-WORKDIR /bin
-# Let's copy our compiled binary from the builder environment to our runtime environment
-COPY --from=builder /app/target/debug/chapter05 ./zero2prod
-# We need the configuration file at runtime!
-COPY configuration.yaml .
+FROM rust:1.47 as builder
+WORKDIR app
+COPY . .
+# Copy over the cached dependencies
+COPY --from=cacher /app/target target
+COPY --from=cacher /usr/local/cargo /usr/local/cargo
+# Build our application, leveraging the cached deps!
+RUN cargo build --release --bin chapter05
 
-# When `docker run` is executed, launch the binary!
-ENTRYPOINT ["./zero2prod"]
+FROM rust:1.47-slim as runtime
+WORKDIR app
+COPY --from=builder /app/target/release/chapter05 /usr/local/bin
+COPY configuration configuration
+ENV APP_ENVIRONMENT production
+ENTRYPOINT ["./usr/local/bin/app"]
