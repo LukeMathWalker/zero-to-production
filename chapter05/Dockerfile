@@ -18,16 +18,17 @@ RUN cargo chef cook --release --recipe-path recipe.json
 
 FROM rust:1.47 as builder
 WORKDIR app
-COPY . .
 # Copy over the cached dependencies
 COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
+COPY . .
 # Build our application, leveraging the cached deps!
+ENV SQLX_OFFLINE true
 RUN cargo build --release --bin chapter05
 
 FROM rust:1.47-slim as runtime
 WORKDIR app
-COPY --from=builder /app/target/release/chapter05 /usr/local/bin
+COPY --from=builder /app/target/release/chapter05 zero2prod
 COPY configuration configuration
 ENV APP_ENVIRONMENT production
-ENTRYPOINT ["./usr/local/bin/app"]
+ENTRYPOINT ["./zero2prod"]
