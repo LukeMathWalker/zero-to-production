@@ -28,7 +28,7 @@ RUN cargo build --release --bin chapter05
 
 FROM rust:1.47-slim as runtime
 WORKDIR app
-COPY --from=builder /app/target/release/chapter05 /usr/local/bin
+COPY --from=builder /app/target/release/chapter05 zero2prod
 COPY configuration configuration
 ENV APP_ENVIRONMENT production
-ENTRYPOINT ["./usr/local/bin/app"]
+ENTRYPOINT ["./zero2prod"]
