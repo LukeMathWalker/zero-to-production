@@ -18,10 +18,10 @@ RUN cargo chef cook --release --recipe-path recipe.json
 
 FROM rust:1.47 as builder
 WORKDIR app
-COPY . .
 # Copy over the cached dependencies
 COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
+COPY . .
 # Build our application, leveraging the cached deps!
 RUN cargo build --release --bin chapter05
 
