@@ -23,6 +23,7 @@ COPY --from=cacher /app/target target
 COPY --from=cacher /usr/local/cargo /usr/local/cargo
 COPY . .
 # Build our application, leveraging the cached deps!
+ENV SQLX_OFFLINE true
 RUN cargo build --release --bin chapter05
 
 FROM rust:1.47-slim as runtime
