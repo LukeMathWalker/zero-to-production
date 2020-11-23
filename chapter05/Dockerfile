@@ -35,4 +35,9 @@ RUN apt-get update -y \
 COPY --from=builder /app/target/release/chapter05 zero2prod
 COPY configuration configuration
 ENV APP_ENVIRONMENT production
+
+RUN groupadd -r rust && useradd -r -s /bin/false -g rust rust
+RUN chown -R rust:rust /app
+USER rust
+
 ENTRYPOINT ["./zero2prod"]
