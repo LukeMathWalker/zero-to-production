@@ -6,15 +6,42 @@
 
 This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
 
-It is structured as a `cargo` workspace: running `cargo build` will build the codebase for **all** chapters.
-If you want to build/test/run the code for a _specific_ chapter, just move into its folder! E.g.:
+## Chapter snapshots
+
+The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 5, right now)_.
+
+You can browse the project at end of previous chapters by switching to their dedicated branches:
+
+- [Chapter 3, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part0)
+- [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
+- [Chapter 4](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-04)
+- [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-05)
+
+## Pre-requisite
+
+You'll need to install:
+
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Docker](https://docs.docker.com/get-docker/)
+
+Launch a (migrated) Postgres database via Docker:
+
 ```bash
-# Run tests for the first part of Chapter 3
-cd chapter03-0
-cargo test
+./scripts/init_db.sh
 ```
-Alternatively, from the top-level folder, you can specify the binary you are interested into:
+
+## How to build
+
+Using `cargo`:
+
 ```bash
-# Run the application as it is at end of the first part of Chapter 3
-cargo run --bin chapter03-0
+cargo build
+```
+
+## How to test 
+
+Using `cargo`:
+
+```bash
+cargo test 
 ```

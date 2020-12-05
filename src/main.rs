@@ -1,8 +1,8 @@
-use chapter05::configuration::get_configuration;
-use chapter05::startup::run;
-use chapter05::telemetry::{get_subscriber, init_subscriber};
 use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
+use zero2prod::configuration::get_configuration;
+use zero2prod::startup::run;
+use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {

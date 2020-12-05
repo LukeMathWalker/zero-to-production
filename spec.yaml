@@ -6,10 +6,10 @@ region: fra
 services:
   - name: zero2prod
     # Relative to the repository root
-    dockerfile_path: chapter05/Dockerfile
-    source_dir: chapter05
+    dockerfile_path: Dockerfile
+    source_dir: .
     github:
-      branch: ch-05
+      branch: master
       deploy_on_push: true
       repo: LukeMathWalker/zero-to-production
     # Active probe used by DigitalOcean's to ensure our application is healthy
