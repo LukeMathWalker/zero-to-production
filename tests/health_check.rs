@@ -1,18 +1,8 @@
-use chapter05::configuration::{get_configuration, DatabaseSettings};
-use chapter05::startup::run;
-use chapter05::telemetry::{get_subscriber, init_subscriber};
 use sqlx::{Connection, Executor, PgConnection, PgPool};
 use std::net::TcpListener;
 use uuid::Uuid;
-
-// Ensure that the `tracing` stack is only initialised once using `lazy_static`
-lazy_static::lazy_static! {
-    static ref TRACING: () = {
-        let filter = if std::env::var("TEST_LOG").is_ok() { "debug" } else { "" };
-        let subscriber = get_subscriber("test".into(), filter.into());
-        init_subscriber(subscriber);
-    };
-}
+use zero2prod::configuration::{get_configuration, DatabaseSettings};
+use zero2prod::startup::run;
 
 pub struct TestApp {
     pub address: String,
@@ -20,10 +10,6 @@ pub struct TestApp {
 }
 
 async fn spawn_app() -> TestApp {
-    // The first time `initialize` is invoked the code in `TRACING` is executed.
-    // All other invocations will instead skip execution.
-    lazy_static::initialize(&TRACING);
-
     let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind random port");
     // We retrieve the port assigned to us by the OS
     let port = listener.local_addr().unwrap().port();
@@ -43,7 +29,7 @@ async fn spawn_app() -> TestApp {
 
 pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
     // Create database
-    let mut connection = PgConnection::connect_with(&config.without_db())
+    let mut connection = PgConnection::connect(&config.connection_string_without_db())
         .await
         .expect("Failed to connect to Postgres");
     connection
@@ -52,7 +38,7 @@ pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
         .expect("Failed to create database.");
 
     // Migrate database
-    let connection_pool = PgPool::connect_with(config.with_db())
+    let connection_pool = PgPool::connect(&config.connection_string())
         .await
         .expect("Failed to connect to Postgres.");
     sqlx::migrate!("./migrations")

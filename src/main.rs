@@ -1,14 +1,10 @@
-use chapter04::configuration::get_configuration;
-use chapter04::startup::run;
-use chapter04::telemetry::{get_subscriber, init_subscriber};
 use sqlx::postgres::PgPool;
 use std::net::TcpListener;
+use zero2prod::configuration::get_configuration;
+use zero2prod::startup::run;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    let subscriber = get_subscriber("zero2prod".into(), "info".into());
-    init_subscriber(subscriber);
-
     let configuration = get_configuration().expect("Failed to read configuration.");
     let connection_pool = PgPool::connect(&configuration.database.connection_string())
         .await

@@ -292,15 +292,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ansi_term"
-version = "0.12.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d52a9bb7ec0cf484c551830a7ce27bd20d67eac647e1befb56b0be4ee39a55d2"
-dependencies = [
- "winapi 0.3.9",
-]
-
-[[package]]
 name = "arc-swap"
 version = "0.4.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -472,76 +463,6 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
-
-[[package]]
-name = "chapter03-0"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "reqwest",
- "tokio",
-]
-
-[[package]]
-name = "chapter03-1"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "reqwest",
- "serde",
- "sqlx",
- "tokio",
- "uuid",
-]
-
-[[package]]
-name = "chapter04"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "lazy_static",
- "reqwest",
- "serde",
- "sqlx",
- "tokio",
- "tracing",
- "tracing-actix-web",
- "tracing-bunyan-formatter",
- "tracing-futures",
- "tracing-log",
- "tracing-subscriber",
- "uuid",
-]
-
-[[package]]
-name = "chapter05"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "lazy_static",
- "reqwest",
- "serde",
- "serde-aux",
- "sqlx",
- "tokio",
- "tracing",
- "tracing-actix-web",
- "tracing-bunyan-formatter",
- "tracing-futures",
- "tracing-log",
- "tracing-subscriber",
- "uuid",
-]
 
 [[package]]
 name = "chrono"
@@ -725,9 +646,6 @@ name = "either"
 version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
-dependencies = [
- "serde",
-]
 
 [[package]]
 name = "encoding_rs"
@@ -911,16 +829,6 @@ checksum = "501466ecc8a30d1d3b7fc9229b122b2ce8ed6e9d9223f1138d4babb253e51817"
 dependencies = [
  "typenum",
  "version_check",
-]
-
-[[package]]
-name = "gethostname"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e692e296bfac1d2533ef168d0b60ff5897b8b70a4009276834014dd8924cc028"
-dependencies = [
- "libc",
- "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1247,15 +1155,6 @@ name = "match_cfg"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ffbee8634e0d45d258acb448e7eaab3fce7a0a467395d4d9f228e3c1f01fb2e4"
-
-[[package]]
-name = "matchers"
-version = "0.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f099785f7595cc4b4553a174ce30dd7589ef93391ff414dbb67f62392b9e0ce1"
-dependencies = [
- "regex-automata",
-]
 
 [[package]]
 name = "matches"
@@ -1646,16 +1545,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "regex-automata"
-version = "0.1.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae1ded71d66a4a97f5e961fd0cb25a5f366a42a41570d16a763a69c092c26ae4"
-dependencies = [
- "byteorder",
- "regex-syntax",
-]
-
-[[package]]
 name = "regex-syntax"
 version = "0.6.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1801,17 +1690,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serde-aux"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7fb1c0e382599b35cf66986b74182d3787605bd4c3087b4091ee305a692f071"
-dependencies = [
- "chrono",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "serde_derive"
 version = "1.0.117"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1828,7 +1706,6 @@ version = "1.0.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcac07dbffa1c65e7f816ab9eba78eb142c6d44410f4eeba1e26e4f5dfa56b95"
 dependencies = [
- "indexmap",
  "itoa",
  "ryu",
  "serde",
@@ -1876,15 +1753,6 @@ dependencies = [
  "cpuid-bool",
  "digest",
  "opaque-debug",
-]
-
-[[package]]
-name = "sharded-slab"
-version = "0.0.9"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06d5a3f5166fb5b42a5439f2eee8b9de149e235961e3eb21c5808fc3ea17ff3e"
-dependencies = [
- "lazy_static",
 ]
 
 [[package]]
@@ -1975,7 +1843,6 @@ dependencies = [
  "parking_lot",
  "percent-encoding",
  "rand",
- "serde",
  "sha-1",
  "sha2",
  "smallvec",
@@ -1998,11 +1865,8 @@ dependencies = [
  "either",
  "futures",
  "heck",
- "hex",
  "proc-macro2",
  "quote",
- "serde",
- "serde_json",
  "sha2",
  "sqlx-core",
  "sqlx-rt",
@@ -2318,49 +2182,7 @@ dependencies = [
  "cfg-if 0.1.10",
  "log",
  "pin-project-lite",
- "tracing-attributes",
  "tracing-core",
-]
-
-[[package]]
-name = "tracing-actix-web"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cc36fc2f840643e49d220d07cd7ca81bc31c7f6df25f164d4257971533dab354"
-dependencies = [
- "actix-web",
- "futures",
- "tracing",
- "tracing-futures",
- "uuid",
-]
-
-[[package]]
-name = "tracing-attributes"
-version = "0.1.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "80e0ccfc3378da0cce270c946b676a376943f5cd16aeba64568e7939806f4ada"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "tracing-bunyan-formatter"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d8dfd28e9ee6d79937f139ae4f112fa2172018cfdf111c0dac1f3f8c6912053"
-dependencies = [
- "chrono",
- "gethostname",
- "log",
- "serde",
- "serde_json",
- "tracing",
- "tracing-core",
- "tracing-log",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -2370,59 +2192,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f50de3927f93d202783f4513cda820ab47ef17f624b03c096e86ef00c67e6b5f"
 dependencies = [
  "lazy_static",
-]
-
-[[package]]
-name = "tracing-futures"
-version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ab7bb6f14721aa00656086e9335d363c5c8747bae02ebe32ea2c7dece5689b4c"
-dependencies = [
- "pin-project",
- "tracing",
-]
-
-[[package]]
-name = "tracing-log"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5e0f8c7178e13481ff6765bd169b33e8d554c5d2bbede5e32c356194be02b9b9"
-dependencies = [
- "lazy_static",
- "log",
- "tracing-core",
-]
-
-[[package]]
-name = "tracing-serde"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fb65ea441fbb84f9f6748fd496cf7f63ec9af5bca94dd86456978d055e8eb28b"
-dependencies = [
- "serde",
- "tracing-core",
-]
-
-[[package]]
-name = "tracing-subscriber"
-version = "0.2.13"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4ef0a5e15477aa303afbfac3a44cba9b6430fdaad52423b1e6c0dbbe28c3eedd"
-dependencies = [
- "ansi_term",
- "chrono",
- "lazy_static",
- "matchers",
- "regex",
- "serde",
- "serde_json",
- "sharded-slab",
- "smallvec",
- "thread_local",
- "tracing",
- "tracing-core",
- "tracing-log",
- "tracing-serde",
 ]
 
 [[package]]
@@ -2729,4 +2498,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39f0c922f1a334134dc2f7a8b67dc5d25f0735263feec974345ff706bcf20b0d"
 dependencies = [
  "linked-hash-map",
+]
+
+[[package]]
+name = "zero2prod"
+version = "0.1.0"
+dependencies = [
+ "actix-rt",
+ "actix-web",
+ "chrono",
+ "config",
+ "reqwest",
+ "serde",
+ "sqlx",
+ "tokio",
+ "uuid",
 ]
