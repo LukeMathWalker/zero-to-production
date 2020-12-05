@@ -4,6 +4,9 @@ on:
   # NB: this differs from the book's project!
   # These settings allow us to run this specific CI pipeline for PRs against
   # this specific branch (a.k.a. book chapter).
+  push:
+    branches:
+      - root-chapter-03-part0
   pull_request:
     types: [ opened, synchronize, reopened ]
     branches:
