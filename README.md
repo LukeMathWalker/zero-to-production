@@ -1,4 +1,4 @@
-# Zero To Production / Code
+# Zero To Production / Code (Chapter 5)
 
 <div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://static-2.gumroad.com/res/gumroad/3629854790655/asset_previews/bc9026cad3ece1746327c1d70218f602/retina/rsz_zero_to_production_punk.png" /></a></div>
 
@@ -6,15 +6,33 @@
 
 This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
 
-It is structured as a `cargo` workspace: running `cargo build` will build the codebase for **all** chapters.
-If you want to build/test/run the code for a _specific_ chapter, just move into its folder! E.g.:
+**This branch is a snapshot of the project at the end of Chapter 5.**
+
+## Pre-requisite
+
+You'll need to install:
+
+- [Rust](https://www.rust-lang.org/tools/install)
+- [Docker](https://docs.docker.com/get-docker/)
+
+Launch a (migrated) Postgres database via Docker:
+
 ```bash
-# Run tests for the first part of Chapter 3
-cd chapter03-0
-cargo test
+./scripts/init_db.sh
 ```
-Alternatively, from the top-level folder, you can specify the binary you are interested into:
+
+## How to build
+
+Using `cargo`:
+
 ```bash
-# Run the application as it is at end of the first part of Chapter 3
-cargo run --bin chapter03-0
+cargo build
+```
+
+## How to test
+
+Using `cargo`:
+
+```bash
+cargo test 
 ```
