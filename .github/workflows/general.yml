@@ -21,9 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres
+        image: postgres:12
         ports:
           - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -33,9 +38,7 @@ jobs:
           override: true
       - name: Migrate database
         env:
-          # Weird networking issue in GitHub actions... It fails with 'connection refused' if we use 'localhost'.
-            POSTGRES_HOST: postgres
-            SKIP_DOCKER: true
+          SKIP_DOCKER: true
         run: |
           sudo apt-get install libpq-dev -y
           cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
