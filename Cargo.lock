@@ -474,76 +474,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "chapter03-0"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "reqwest",
- "tokio",
-]
-
-[[package]]
-name = "chapter03-1"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "reqwest",
- "serde",
- "sqlx",
- "tokio",
- "uuid",
-]
-
-[[package]]
-name = "chapter04"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "lazy_static",
- "reqwest",
- "serde",
- "sqlx",
- "tokio",
- "tracing",
- "tracing-actix-web",
- "tracing-bunyan-formatter",
- "tracing-futures",
- "tracing-log",
- "tracing-subscriber",
- "uuid",
-]
-
-[[package]]
-name = "chapter05"
-version = "0.1.0"
-dependencies = [
- "actix-rt",
- "actix-web",
- "chrono",
- "config",
- "lazy_static",
- "reqwest",
- "serde",
- "serde-aux",
- "sqlx",
- "tokio",
- "tracing",
- "tracing-actix-web",
- "tracing-bunyan-formatter",
- "tracing-futures",
- "tracing-log",
- "tracing-subscriber",
- "uuid",
-]
-
-[[package]]
 name = "chrono"
 version = "0.4.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -725,9 +655,6 @@ name = "either"
 version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e78d4f1cc4ae33bbfc157ed5d5a5ef3bc29227303d595861deb238fcec4e9457"
-dependencies = [
- "serde",
-]
 
 [[package]]
 name = "encoding_rs"
@@ -1801,17 +1728,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "serde-aux"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c7fb1c0e382599b35cf66986b74182d3787605bd4c3087b4091ee305a692f071"
-dependencies = [
- "chrono",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "serde_derive"
 version = "1.0.117"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1828,7 +1744,6 @@ version = "1.0.59"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcac07dbffa1c65e7f816ab9eba78eb142c6d44410f4eeba1e26e4f5dfa56b95"
 dependencies = [
- "indexmap",
  "itoa",
  "ryu",
  "serde",
@@ -1975,7 +1890,6 @@ dependencies = [
  "parking_lot",
  "percent-encoding",
  "rand",
- "serde",
  "sha-1",
  "sha2",
  "smallvec",
@@ -1998,11 +1912,8 @@ dependencies = [
  "either",
  "futures",
  "heck",
- "hex",
  "proc-macro2",
  "quote",
- "serde",
- "serde_json",
  "sha2",
  "sqlx-core",
  "sqlx-rt",
@@ -2729,4 +2640,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39f0c922f1a334134dc2f7a8b67dc5d25f0735263feec974345ff706bcf20b0d"
 dependencies = [
  "linked-hash-map",
+]
+
+[[package]]
+name = "zero2prod"
+version = "0.1.0"
+dependencies = [
+ "actix-rt",
+ "actix-web",
+ "chrono",
+ "config",
+ "lazy_static",
+ "reqwest",
+ "serde",
+ "sqlx",
+ "tokio",
+ "tracing",
+ "tracing-actix-web",
+ "tracing-bunyan-formatter",
+ "tracing-futures",
+ "tracing-log",
+ "tracing-subscriber",
+ "uuid",
 ]
