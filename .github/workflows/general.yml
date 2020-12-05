@@ -4,6 +4,9 @@ on:
   # NB: this differs from the book's project!
   # These settings allow us to run this specific CI pipeline for PRs against
   # this specific branch (a.k.a. book chapter).
+  push:
+    branches:
+      - root-chapter-03-part1
   pull_request:
     types: [ opened, synchronize, reopened ]
     branches:
@@ -31,8 +34,8 @@ jobs:
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
-          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
-          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
+          cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true ./scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: test
@@ -72,8 +75,8 @@ jobs:
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
-          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
-          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
+          cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true ./scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: clippy
@@ -100,8 +103,8 @@ jobs:
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
-          cargo install --version=0.1.0-beta.1 sqlx-cli --no-default-features --features postgres
-          SKIP_DOCKER=true cd chapter03-1 && ./scripts/init_db.sh
+          cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
+          SKIP_DOCKER=true ./scripts/init_db.sh
 
       - name: Run cargo-tarpaulin
         uses: actions-rs/tarpaulin@v0.1
