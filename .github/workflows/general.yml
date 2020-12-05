@@ -32,10 +32,14 @@ jobs:
           toolchain: stable
           override: true
       - name: Migrate database
+        env:
+          # Weird networking issue in GitHub actions... It fails with 'connection refused' if we use 'localhost'.
+            POSTGRES_HOST: postgres
+            SKIP_DOCKER: true
         run: |
           sudo apt-get install libpq-dev -y
           cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
-          SKIP_DOCKER=true ./scripts/init_db.sh
+          ./scripts/init_db.sh
       - uses: actions-rs/cargo@v1
         with:
           command: test
