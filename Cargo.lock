@@ -504,6 +504,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "claim"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "68ad37958d55b29a7088909368968d2fe876a24c203f8441195130f3b15194b9"
+dependencies = [
+ "autocfg",
+]
+
+[[package]]
 name = "config"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2888,6 +2897,7 @@ dependencies = [
  "actix-rt",
  "actix-web",
  "chrono",
+ "claim",
  "config",
  "lazy_static",
  "reqwest",
