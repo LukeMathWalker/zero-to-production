@@ -24,7 +24,7 @@ pub async fn subscribe(
 ) -> Result<HttpResponse, HttpResponse> {
     let new_subscriber = NewSubscriber {
         email: form.0.email,
-        name: SubscriberName::parse(form.0.name),
+        name: SubscriberName::parse(form.0.name).expect("Name validation failed."),
     };
     insert_subscriber(&pool, &new_subscriber)
         .await
