@@ -28,7 +28,9 @@ tracing-bunyan-formatter = "0.1.6"
 tracing-log = "0.1.1"
 tracing-actix-web = "0.2.0"
 serde-aux = "1.0.1"
+unicode-segmentation = "1.7.1"
 
 [dev-dependencies]
 reqwest = { version = "0.10.7", features = ["json"] }
 lazy_static = "1.4.0"
+claim = "0.4.0"

@@ -1,4 +1,4 @@
-# Zero To Production / Code
+# Zero To Production / Code (Chapter 5)
 
 <div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://static-2.gumroad.com/res/gumroad/3629854790655/asset_previews/bc9026cad3ece1746327c1d70218f602/retina/rsz_zero_to_production_punk.png" /></a></div>
 
@@ -8,7 +8,7 @@ This repository serves as supplementary material for [the book](https://zero2pro
 
 ## Chapter snapshots
 
-The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 5, right now)_.
+The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 6, right now)_.
 
 You can browse the project at end of previous chapters by switching to their dedicated branches:
 
@@ -16,6 +16,7 @@ You can browse the project at end of previous chapters by switching to their ded
 - [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
 - [Chapter 4](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-04)
 - [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-05)
+- [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
 
 ## Pre-requisite
 
