@@ -16,7 +16,7 @@ You can browse the project at end of previous chapters by switching to their ded
 - [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
 - [Chapter 4](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-04)
 - [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-05)
-- [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
+- [Chapter 6](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
 
 ## Pre-requisite
 
