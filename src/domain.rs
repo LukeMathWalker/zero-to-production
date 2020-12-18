@@ -30,16 +30,12 @@ impl SubscriberName {
         // Iterate over all characters in the input `s` to check if any of them matches
         // one of the characters in the forbidden array.
         let forbidden_characters = ['/', '(', ')', '"', '<', '>', '\\', '{', '}'];
-        let contains_forbidden_characters = s
-            .chars()
-            .filter(|g| forbidden_characters.contains(g))
-            .count()
-            > 0;
+        let contains_forbidden_characters = s.chars().any(|g| forbidden_characters.contains(&g));
 
         if is_empty_or_whitespace || is_too_long || contains_forbidden_characters {
             Err(format!("{} is not a valid subscriber name.", s))
         } else {
-            Ok(Self(s))
+            Ok(SubscriberName(s))
         }
     }
 }
@@ -80,7 +76,7 @@ mod tests {
     }
 
     #[test]
-    fn names_containing_an_invalid_characters_are_rejected() {
+    fn names_containing_an_invalid_character_are_rejected() {
         for name in vec!['/', '(', ')', '"', '<', '>', '\\', '{', '}'] {
             let name = name.to_string();
             assert_err!(SubscriberName::parse(name));
