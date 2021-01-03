@@ -6,9 +6,10 @@
 
 This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
 
+<<<<<<< HEAD
 ## Chapter snapshots
 
-The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 6, right now)_.
+The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 6 Part 1, right now)_.
 
 You can browse the project at end of previous chapters by switching to their dedicated branches:
 
@@ -16,7 +17,8 @@ You can browse the project at end of previous chapters by switching to their ded
 - [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
 - [Chapter 4](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-04)
 - [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-05)
-- [Chapter 6](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
+- [Chapter 6, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
+- [Chapter 6, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06-part1)
 
 ## Pre-requisite
 
