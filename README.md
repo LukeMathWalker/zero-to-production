@@ -6,7 +6,6 @@
 
 This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
 
-<<<<<<< HEAD
 ## Chapter snapshots
 
 The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 6 Part 1, right now)_.
