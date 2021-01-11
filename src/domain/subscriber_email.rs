@@ -23,8 +23,8 @@ impl AsRef<str> for SubscriberEmail {
 mod tests {
     use super::SubscriberEmail;
     use claim::assert_err;
-    use fake::Fake;
     use fake::faker::internet::en::SafeEmail;
+    use fake::Fake;
 
     #[test]
     fn empty_string_is_rejected() {
