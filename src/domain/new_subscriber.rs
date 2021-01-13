@@ -1,5 +1,5 @@
-use crate::domain::subscriber_email::SubscriberEmail;
-use crate::domain::subscriber_name::SubscriberName;
+use crate::domain::SubscriberEmail;
+use crate::domain::SubscriberName;
 
 pub struct NewSubscriber {
     // We are not using `String` anymore!
