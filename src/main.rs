@@ -16,7 +16,16 @@ async fn main() -> std::io::Result<()> {
         .connect_with(configuration.database.with_db())
         .await
         .expect("Failed to connect to Postgres.");
-    let email_client = EmailClient::new(configuration.email_client.base_url);
+
+    let sender_email = configuration
+        .email_client
+        .sender()
+        .expect("Invalid sender email address.");
+    let email_client = EmailClient::new(
+        configuration.email_client.base_url,
+        sender_email,
+        configuration.email_client.authorization_token,
+    );
 
     let address = format!(
         "{}:{}",
