@@ -18,7 +18,8 @@ impl EmailClient {
         &self,
         recipient: SubscriberEmail,
         subject: &str,
-        content: &str,
+        html_content: &str,
+        text_content: &str,
     ) -> Result<(), String> {
         todo!()
     }
