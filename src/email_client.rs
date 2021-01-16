@@ -3,12 +3,14 @@ use reqwest::Client;
 
 pub struct EmailClient {
     http_client: Client,
+    base_url: String,
 }
 
 impl EmailClient {
-    pub fn new() -> Self {
+    pub fn new(base_url: String) -> Self {
         Self {
             http_client: Client::new(),
+            base_url,
         }
     }
 
