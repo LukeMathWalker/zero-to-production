@@ -6,11 +6,11 @@ on:
   # this specific branch (a.k.a. book chapter).
   push:
     branches:
-      - root-chapter-07-part0
+      - master
   pull_request:
     types: [ opened, synchronize, reopened ]
     branches:
-      - root-chapter-07-part0
+      - master
 
 env:
   CARGO_TERM_COLOR: always
