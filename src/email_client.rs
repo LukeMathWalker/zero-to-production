@@ -86,7 +86,7 @@ mod tests {
         }
     }
 
-    #[actix_rt::test]
+    #[tokio::test]
     async fn send_email_sends_the_expected_request() {
         // Arrange
         let mock_server = MockServer::start().await;
@@ -115,7 +115,7 @@ mod tests {
         // Assert
     }
 
-    #[actix_rt::test]
+    #[tokio::test]
     async fn send_email_succeeds_if_the_server_returns_200() {
         // Arrange
         let mock_server = MockServer::start().await;
@@ -141,7 +141,7 @@ mod tests {
         assert_ok!(outcome);
     }
 
-    #[actix_rt::test]
+    #[tokio::test]
     async fn send_email_fails_if_the_server_returns_500() {
         // Arrange
         let mock_server = MockServer::start().await;
