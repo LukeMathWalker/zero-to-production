@@ -103,7 +103,7 @@ mod tests {
 
     /// Get a test instance of `EmailClient`.
     fn email_client(base_url: String) -> EmailClient {
-        let email_client = EmailClient::new(base_url, email(), Faker.fake());
+        EmailClient::new(base_url, email(), Faker.fake())
     }
 
     #[tokio::test]
@@ -124,7 +124,7 @@ mod tests {
 
         // Act
         let _ = email_client
-            .send_email(subscriber_email(), &subject(), &content(), &content())
+            .send_email(email(), &subject(), &content(), &content())
             .await;
 
         // Assert
@@ -144,7 +144,7 @@ mod tests {
 
         // Act
         let outcome = email_client
-            .send_email(subscriber_email(), &subject(), &content(), &content())
+            .send_email(email(), &subject(), &content(), &content())
             .await;
 
         // Assert
@@ -166,7 +166,7 @@ mod tests {
 
         // Act
         let outcome = email_client
-            .send_email(subscriber_email(), &subject(), &content(), &content())
+            .send_email(email(), &subject(), &content(), &content())
             .await;
 
         // Assert
@@ -188,7 +188,7 @@ mod tests {
 
         // Act
         let outcome = email_client
-            .send_email(subscriber_email(), &subject(), &content(), &content())
+            .send_email(email(), &subject(), &content(), &content())
             .await;
 
         // Assert
