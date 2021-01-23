@@ -78,7 +78,6 @@ jobs:
           toolchain: stable
           components: clippy
           override: true
-      - run: rustup component add clippy
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
