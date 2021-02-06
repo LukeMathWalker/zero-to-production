@@ -13,9 +13,11 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "3.0.0"
-actix-rt = "1.1.1"
-tokio = "0.2.22"
+actix-web = "=4.0.0-beta.1"
+actix-rt = "=2.0.0-beta.2"
+actix-service = "=2.0.0-beta.3"
+actix-macros = "=0.2.0-beta.1"
+tokio = "1"
 
 [dev-dependencies]
-reqwest = "0.10.7"
+reqwest = "0.11"
