@@ -14,8 +14,8 @@ name = "zero2prod"
 
 [dependencies]
 actix-web = "4.0.0-beta.3"
-tokio = "1"
 
 [dev-dependencies]
 actix-rt = "2"
 reqwest = "0.11"
+tokio = "1"
