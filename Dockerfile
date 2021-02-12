@@ -1,22 +1,16 @@
-FROM rust:1.47 AS planner
+FROM lukemathwalker/cargo-chef as planner
 WORKDIR app
-# We only pay the installation cost once,
-# it will be cached from the second build onwards
-# To ensure a reproducible build consider pinning
-# the cargo-chef version with `--version X.X.X`
-RUN cargo install cargo-chef
 COPY . .
 # Compute a lock-like file for our project
 RUN cargo chef prepare  --recipe-path recipe.json
 
-FROM rust:1.47 AS cacher
+FROM lukemathwalker/cargo-chef as planner
 WORKDIR app
-RUN cargo install cargo-chef
 COPY --from=planner /app/recipe.json recipe.json
 # Build our project dependencies, not our application!
 RUN cargo chef cook --release --recipe-path recipe.json
 
-FROM rust:1.47 AS builder
+FROM rust:1.50 AS builder
 WORKDIR app
 # Copy over the cached dependencies
 COPY --from=cacher /app/target target
