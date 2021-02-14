@@ -1,7 +1,7 @@
 use sqlx::{Connection, Executor, PgConnection, PgPool};
 use uuid::Uuid;
 use zero2prod::configuration::{get_configuration, DatabaseSettings};
-use zero2prod::startup::{build, get_connection_pool};
+use zero2prod::startup::{get_connection_pool, Application};
 use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
 // Ensure that the `tracing` stack is only initialised once using `lazy_static`
@@ -33,12 +33,14 @@ pub async fn spawn_app() -> TestApp {
     configure_database(&configuration.database).await;
 
     // Launch the application as a background task
-    let server = build(configuration.clone())
+    let application = Application::build(configuration.clone())
         .await
         .expect("Failed to build application.");
-    let _ = tokio::spawn(server);
+    let address = application.address().to_owned();
+    let _ = tokio::spawn(application.run_until_stopped());
+
     TestApp {
-        address: todo!(),
+        address,
         db_pool: get_connection_pool(&configuration.database)
             .await
             .expect("Failed to connect to the database"),
