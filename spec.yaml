@@ -9,7 +9,7 @@ services:
     dockerfile_path: Dockerfile
     source_dir: .
     github:
-      branch: main
+      branch: root-chapter-07-part1
       deploy_on_push: true
       repo: LukeMathWalker/zero-to-production
     # Active probe used by DigitalOcean's to ensure our application is healthy
