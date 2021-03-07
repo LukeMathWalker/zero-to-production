@@ -4,7 +4,7 @@ COPY . .
 # Compute a lock-like file for our project
 RUN cargo chef prepare  --recipe-path recipe.json
 
-FROM lukemathwalker/cargo-chef as planner
+FROM lukemathwalker/cargo-chef as cacher
 WORKDIR app
 COPY --from=planner /app/recipe.json recipe.json
 # Build our project dependencies, not our application!
