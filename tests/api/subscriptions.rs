@@ -60,15 +60,22 @@ async fn subscribe_sends_a_confirmation_email_with_a_link() {
 
     // Assert
     let email_request = &app.email_server.received_requests().await.unwrap()[0];
-    let body = std::str::from_utf8(&email_request.body).unwrap();
-    let links: Vec<_> = linkify::LinkFinder::new()
-        .links(body)
-        .filter(|l| *l.kind() == linkify::LinkKind::Url)
-        .collect();
-    // One in the HTML version, one in the plain text version
-    assert_eq!(links.len(), 2);
+    let body: serde_json::Value = serde_json::from_slice(&email_request.body).unwrap();
+
+    // Extract the link from one of the request fields.
+    let get_link = |s: &str| {
+        let links: Vec<_> = linkify::LinkFinder::new()
+            .links(s)
+            .filter(|l| *l.kind() == linkify::LinkKind::Url)
+            .collect();
+        assert_eq!(links.len(), 1);
+        links[0].as_str().to_owned()
+    };
+
+    let html_link = get_link(&body["HtmlBody"].as_str().unwrap());
+    let text_link = get_link(&body["TextBody"].as_str().unwrap());
     // The two links should be identical
-    assert_eq!(links[0].as_str(), links[1].as_str());
+    assert_eq!(html_link, text_link);
 }
 
 #[actix_rt::test]

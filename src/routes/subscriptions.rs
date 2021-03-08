@@ -43,12 +43,19 @@ pub async fn subscribe(
         .await
         .map_err(|_| HttpResponse::InternalServerError().finish())?;
     // We are swallowing the error for the time being.
+    let confirmation_link = "https://my-api.com/subscriptions/confirm";
     let _ = email_client
         .send_email(
             new_subscriber.email,
             "Welcome!",
-            "Welcome to our newsletter!",
-            "Welcome to our newsletter!",
+            &format!(
+                "Welcome to our newsletter!<br />Click <a href=\"{}\">here</a> to confirm your subscription.", 
+                confirmation_link
+            ),
+            &format!(
+                "Welcome to our newsletter!\nVisit {} to confirm your subscription.", 
+                confirmation_link
+            ),
         )
         .await;
     Ok(HttpResponse::Ok().finish())
