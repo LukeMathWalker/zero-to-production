@@ -44,6 +44,34 @@ async fn subscribe_sends_a_confirmation_email_for_valid_data() {
 }
 
 #[actix_rt::test]
+async fn subscribe_sends_a_confirmation_email_with_a_link() {
+    // Arrange
+    let app = spawn_app().await;
+    let body = "name=le%20guin&email=ursula_le_guin%40gmail.com";
+
+    Mock::given(path("/email"))
+        .and(method("POST"))
+        .respond_with(ResponseTemplate::new(200))
+        .mount(&app.email_server)
+        .await;
+
+    // Act
+    app.post_subscriptions(body.into()).await;
+
+    // Assert
+    let email_request = &app.email_server.received_requests().await.unwrap()[0];
+    let body = std::str::from_utf8(&email_request.body).unwrap();
+    let links: Vec<_> = linkify::LinkFinder::new()
+        .links(body)
+        .filter(|l| *l.kind() == linkify::LinkKind::Url)
+        .collect();
+    // One in the HTML version, one in the plain text version
+    assert_eq!(links.len(), 2);
+    // The two links should be identical
+    assert_eq!(links[0].as_str(), links[1].as_str());
+}
+
+#[actix_rt::test]
 async fn subscribe_returns_a_400_when_data_is_missing() {
     // Arrange
     let app = spawn_app().await;
