@@ -118,15 +118,16 @@ async fn the_link_returned_by_subscribe_sets_a_subscriber_as_confirmed() {
     };
     let confirmation_link = Url::parse(&get_link(&body["HtmlBody"].as_str().unwrap())).unwrap();
     // Let's make sure we don't call random APIs on the web
-    assert_eq!(confirmation_link.domain().unwrap(), "127.0.0.1");
+    assert_eq!(confirmation_link.host_str().unwrap(), "127.0.0.1");
+    // Let's rewrite the URL to include the port
+    let confirmation_link = format!("{}{}", app.address, confirmation_link.path());
 
     // Act
-    let response = reqwest::get(confirmation_link)
+    let response = reqwest::get(&confirmation_link)
         .await
         .unwrap()
         .error_for_status()
         .unwrap();
-    dbg!(&response);
 
     // Assert
     let saved = sqlx::query!(r#"SELECT status FROM subscriptions WHERE name = 'le guin' AND email = 'ursula_le_guin@gmail.com'"#,)

@@ -33,6 +33,8 @@ impl TestApp {
 }
 
 pub async fn spawn_app() -> TestApp {
+    lazy_static::initialize(&TRACING);
+
     // Launch a mock server to stand in for Postmark's API
     let email_server = MockServer::start().await;
 

@@ -36,7 +36,12 @@ impl Application {
         );
         let listener = TcpListener::bind(&address)?;
         let port = listener.local_addr().unwrap().port();
-        let server = run(listener, connection_pool, email_client)?;
+        let server = run(
+            listener,
+            connection_pool,
+            email_client,
+            configuration.application.url,
+        )?;
 
         Ok(Self { port, server })
     }
@@ -57,10 +62,13 @@ pub async fn get_connection_pool(configuration: &DatabaseSettings) -> Result<PgP
         .await
 }
 
+pub struct ApplicationUrl(pub String);
+
 fn run(
     listener: TcpListener,
     db_pool: PgPool,
     email_client: EmailClient,
+    application_url: String,
 ) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
     let email_client = Data::new(email_client);
@@ -71,6 +79,7 @@ fn run(
             .route("/subscriptions", web::post().to(subscribe))
             .app_data(db_pool.clone())
             .app_data(email_client.clone())
+            .data(ApplicationUrl(application_url.clone()))
     })
     .listen(listener)?
     .run();
