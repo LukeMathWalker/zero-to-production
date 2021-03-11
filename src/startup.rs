@@ -1,6 +1,6 @@
 use crate::configuration::{DatabaseSettings, Settings};
 use crate::email_client::EmailClient;
-use crate::routes::{health_check, subscribe};
+use crate::routes::{health_check, subscribe, confirm};
 use actix_web::dev::Server;
 use actix_web::web::Data;
 use actix_web::{web, App, HttpServer};
@@ -40,7 +40,7 @@ impl Application {
             listener,
             connection_pool,
             email_client,
-            configuration.application.url,
+            configuration.application.base_url,
         )?;
 
         Ok(Self { port, server })
@@ -62,13 +62,13 @@ pub async fn get_connection_pool(configuration: &DatabaseSettings) -> Result<PgP
         .await
 }
 
-pub struct ApplicationUrl(pub String);
+pub struct ApplicationBaseUrl(pub String);
 
 fn run(
     listener: TcpListener,
     db_pool: PgPool,
     email_client: EmailClient,
-    application_url: String,
+    base_url: String,
 ) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
     let email_client = Data::new(email_client);
@@ -77,9 +77,10 @@ fn run(
             .wrap(TracingLogger)
             .route("/health_check", web::get().to(health_check))
             .route("/subscriptions", web::post().to(subscribe))
+            .route("/subscriptions/confirm", web::get().to(confirm))
             .app_data(db_pool.clone())
             .app_data(email_client.clone())
-            .data(ApplicationUrl(application_url.clone()))
+            .data(ApplicationBaseUrl(base_url.clone()))
     })
     .listen(listener)?
     .run();

@@ -16,6 +16,7 @@ lazy_static::lazy_static! {
 
 pub struct TestApp {
     pub address: String,
+    pub port: u16,
     pub db_pool: PgPool,
     pub email_server: MockServer,
 }
@@ -57,11 +58,12 @@ pub async fn spawn_app() -> TestApp {
     let application = Application::build(configuration.clone())
         .await
         .expect("Failed to build application.");
-    let address = format!("http://localhost:{}", application.port());
+    let application_port = application.port();
     let _ = tokio::spawn(application.run_until_stopped());
 
     TestApp {
-        address,
+        address: format!("http://localhost:{}", application_port),
+        port: application_port,
         db_pool: get_connection_pool(&configuration.database)
             .await
             .expect("Failed to connect to the database"),
