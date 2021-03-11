@@ -29,6 +29,8 @@ tracing-actix-web = "0.3.0-beta.2"
 serde-aux = "1.0.1"
 unicode-segmentation = "1.7.1"
 validator = "0.12.0"
+rand = { version = "0.8", features=["std_rng"] }
+sha2 = { version = "0.9" }
 
 [dev-dependencies]
 lazy_static = "1.4.0"
