@@ -10,7 +10,7 @@ This repository serves as supplementary material for [the book](https://zero2pro
 
 The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 7 Part 2, right now)_.
 
-You can browse the project at end of previous chapters by switching to their dedicated branches:
+You can browse the project at the end of previous chapters by switching to their dedicated branches:
 
 - [Chapter 3, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part0)
 - [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
