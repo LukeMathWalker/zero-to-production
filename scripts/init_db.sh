@@ -14,12 +14,21 @@ DB_PORT="${POSTGRES_PORT:=5432}"
 # Allow to skip Docker if a dockerized Postgres database is already running
 if [[ -z "${SKIP_DOCKER}" ]]
 then
+  # if a postgres container is running, print instructions to kill it and exit
+  RUNNING_POSTGRES_CONTAINER=$(docker ps --filter 'name=postgres' --format '{{.ID}}')
+  if [[ -n $RUNNING_POSTGRES_CONTAINER ]]; then
+    echo >&2 "there is a postgres container already running, kill it with"
+    echo >&2 "    docker kill ${RUNNING_POSTGRES_CONTAINER}"
+    exit 1
+  fi
+
   # Launch postgres using Docker
   docker run \
       -e POSTGRES_USER=${DB_USER} \
       -e POSTGRES_PASSWORD=${DB_PASSWORD} \
       -e POSTGRES_DB=${DB_NAME} \
       -p "${DB_PORT}":5432 \
+      --name "postgres_$(date '+%s')" \
       -d postgres \
       postgres -N 1000
       # ^ Increased maximum number of connections for testing purposes
