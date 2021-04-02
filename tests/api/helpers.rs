@@ -24,7 +24,7 @@ pub struct TestApp {
 /// Confirmation links embedded in the request to the email API.
 pub struct ConfirmationLinks {
     pub html: reqwest::Url,
-    pub plain_text: reqwest::Url
+    pub plain_text: reqwest::Url,
 }
 
 impl TestApp {
@@ -59,10 +59,7 @@ impl TestApp {
 
         let html = get_link(&body["HtmlBody"].as_str().unwrap());
         let plain_text = get_link(&body["TextBody"].as_str().unwrap());
-        ConfirmationLinks {
-            html,
-            plain_text
-        }
+        ConfirmationLinks { html, plain_text }
     }
 }
 
