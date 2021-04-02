@@ -5,7 +5,7 @@ use actix_web::{web, HttpResponse};
 use chrono::Utc;
 use rand::distributions::Alphanumeric;
 use rand::{thread_rng, Rng};
-use sqlx::{PgPool, Transaction, Postgres};
+use sqlx::{PgPool, Postgres, Transaction};
 use std::convert::TryInto;
 use uuid::Uuid;
 
@@ -43,7 +43,10 @@ pub async fn subscribe(
         .0
         .try_into()
         .map_err(|_| HttpResponse::BadRequest().finish())?;
-    let mut transaction = pool.begin().await.map_err(|_| HttpResponse::InternalServerError().finish())?;
+    let mut transaction = pool
+        .begin()
+        .await
+        .map_err(|_| HttpResponse::InternalServerError().finish())?;
     let subscriber_id = insert_subscriber(&mut transaction, &new_subscriber)
         .await
         .map_err(|_| HttpResponse::InternalServerError().finish())?;
@@ -52,7 +55,10 @@ pub async fn subscribe(
     store_token(&mut transaction, subscriber_id, &subscription_token)
         .await
         .map_err(|_| HttpResponse::InternalServerError().finish())?;
-    transaction.commit().await.map_err(|_| HttpResponse::InternalServerError().finish())?;
+    transaction
+        .commit()
+        .await
+        .map_err(|_| HttpResponse::InternalServerError().finish())?;
     let _ = send_confirmation_email(
         &email_client,
         new_subscriber,
