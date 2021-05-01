@@ -1384,6 +1384,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "opentelemetry"
+version = "0.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b91cea1dfd50064e52db033179952d18c770cbc5dfefc8eba45d619357ba3914"
+dependencies = [
+ "async-trait",
+ "futures",
+ "js-sys",
+ "lazy_static",
+ "percent-encoding",
+ "pin-project",
+ "rand 0.8.3",
+ "thiserror",
+]
+
+[[package]]
 name = "parking"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2361,14 +2377,18 @@ dependencies = [
 
 [[package]]
 name = "tracing-actix-web"
-version = "0.3.0-beta.3"
+version = "0.4.0-beta.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1f61ca5db1113b7b2ad09585d24d1143e940465596ba434ba19d506ee2ab28a1"
+checksum = "d232c700ac99b41f56aac3832f138009b2dc7538cbdc76fdc6b8304a1ee2d2e0"
 dependencies = [
+ "actix-http",
+ "actix-service",
  "actix-web",
  "futures",
+ "opentelemetry",
  "tracing",
  "tracing-futures",
+ "tracing-opentelemetry",
  "uuid",
 ]
 
@@ -2428,6 +2448,19 @@ dependencies = [
  "lazy_static",
  "log",
  "tracing-core",
+]
+
+[[package]]
+name = "tracing-opentelemetry"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "99003208b647dae59dcefc49c98aecaa3512fbc29351685d4b9ef23a9218458e"
+dependencies = [
+ "opentelemetry",
+ "tracing",
+ "tracing-core",
+ "tracing-log",
+ "tracing-subscriber",
 ]
 
 [[package]]
