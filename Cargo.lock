@@ -2583,7 +2583,7 @@ dependencies = [
  "claim",
  "config",
  "fake",
- "lazy_static",
+ "once_cell",
  "quickcheck",
  "quickcheck_macros",
  "reqwest",
