@@ -66,7 +66,7 @@ fn run(
     let email_client = Data::new(email_client);
     let server = HttpServer::new(move || {
         App::new()
-            .wrap(TracingLogger)
+            .wrap(TracingLogger::default())
             .route("/health_check", web::get().to(health_check))
             .route("/subscriptions", web::post().to(subscribe))
             .app_data(db_pool.clone())
