@@ -26,7 +26,7 @@ reqwest = { version = "0.11", default-features = false, features = ["json", "rus
 tracing = "0.1.19"
 tracing-futures = "0.2.4"
 tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }
-tracing-bunyan-formatter = "0.1.6"
+tracing-bunyan-formatter = "0.2.2"
 tracing-log = "0.1.1"
 serde-aux = "1.0.1"
 unicode-segmentation = "1.7.1"
