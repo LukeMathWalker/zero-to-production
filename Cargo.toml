@@ -28,6 +28,7 @@ tracing-futures = "0.2.4"
 tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }
 tracing-bunyan-formatter = "0.2.2"
 tracing-log = "0.1.1"
+thiserror = "1.0.24"
 serde-aux = "1.0.1"
 unicode-segmentation = "1.7.1"
 validator = "0.12.0"
