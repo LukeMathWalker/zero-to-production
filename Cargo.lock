@@ -2670,6 +2670,7 @@ dependencies = [
  "actix-rt",
  "actix-service",
  "actix-web",
+ "anyhow",
  "chrono",
  "claim",
  "config",
