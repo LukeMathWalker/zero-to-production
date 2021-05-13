@@ -8,7 +8,7 @@ This repository serves as supplementary material for [the book](https://zero2pro
 
 ## Chapter snapshots
 
-The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 7 Part 2, right now)_.
+The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 8, right now)_.
 
 You can browse the project at the end of previous chapters by switching to their dedicated branches:
 
@@ -21,6 +21,7 @@ You can browse the project at the end of previous chapters by switching to their
 - [Chapter 7, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part0)
 - [Chapter 7, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part1)
 - [Chapter 7, Part 2](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part2)
+- [Chapter 8](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-08-part0)
 
 ## Pre-requisite
 
