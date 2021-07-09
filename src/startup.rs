@@ -72,6 +72,7 @@ fn run(
 ) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
     let email_client = Data::new(email_client);
+    let base_url = Data::new(ApplicationBaseUrl(base_url));
     let server = HttpServer::new(move || {
         App::new()
             .wrap(TracingLogger::default())
@@ -80,7 +81,7 @@ fn run(
             .route("/subscriptions/confirm", web::get().to(confirm))
             .app_data(db_pool.clone())
             .app_data(email_client.clone())
-            .data(ApplicationBaseUrl(base_url.clone()))
+            .app_data(base_url.clone())
     })
     .listen(listener)?
     .run();
