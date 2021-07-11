@@ -13,7 +13,8 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "4.0.0-beta.3"
+actix-web = "=4.0.0-beta.8"
+actix-http = "=3.0.0-beta.8"
 
 [dev-dependencies]
 actix-rt = "2"
