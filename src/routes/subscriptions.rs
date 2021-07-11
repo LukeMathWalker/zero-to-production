@@ -18,20 +18,19 @@ pub struct FormData {
         name = %form.name
     )
 )]
-pub async fn subscribe(
-    form: web::Form<FormData>,
-    pool: web::Data<PgPool>,
-) -> Result<HttpResponse, HttpResponse> {
-    let name =
-        SubscriberName::parse(form.0.name).map_err(|_| HttpResponse::BadRequest().finish())?;
+pub async fn subscribe(form: web::Form<FormData>, pool: web::Data<PgPool>) -> HttpResponse {
+    let name = match SubscriberName::parse(form.0.name) {
+        Ok(name) => name,
+        Err(_) => return HttpResponse::BadRequest().finish(),
+    };
     let new_subscriber = NewSubscriber {
         email: form.0.email,
         name,
     };
-    insert_subscriber(&pool, &new_subscriber)
-        .await
-        .map_err(|_| HttpResponse::InternalServerError().finish())?;
-    Ok(HttpResponse::Ok().finish())
+    match insert_subscriber(&pool, &new_subscriber).await {
+        Ok(_) => HttpResponse::Ok().finish(),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
 }
 
 #[tracing::instrument(
