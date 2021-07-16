@@ -54,8 +54,8 @@ impl ResponseError for SubscribeError {
     name = "Adding a new subscriber",
     skip(form, pool, email_client, base_url),
     fields(
-        email = %form.email,
-        name = %form.name
+        subscriber_email = %form.email,
+        subscriber_name = %form.name
     )
 )]
 pub async fn subscribe(
