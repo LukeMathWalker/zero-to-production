@@ -8,7 +8,7 @@ async fn create_unconfirmed_subscriber(app: &TestApp) -> ConfirmationLinks {
     let _mock_guard = Mock::given(path("/email"))
         .and(method("POST"))
         .respond_with(ResponseTemplate::new(200))
-        .up_to_n_times(1)
+        .expect(1)
         .mount_as_scoped(&app.email_server)
         .await;
     app.post_subscriptions(body.into())
