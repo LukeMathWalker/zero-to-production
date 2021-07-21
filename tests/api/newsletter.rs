@@ -5,11 +5,11 @@ use wiremock::{Mock, ResponseTemplate};
 async fn create_unconfirmed_subscriber(app: &TestApp) -> ConfirmationLinks {
     let body = "name=le%20guin&email=ursula_le_guin%40gmail.com";
 
-    Mock::given(path("/email"))
+    let _mock_guard = Mock::given(path("/email"))
         .and(method("POST"))
         .respond_with(ResponseTemplate::new(200))
         .up_to_n_times(1)
-        .mount(&app.email_server)
+        .mount_as_scoped(&app.email_server)
         .await;
     app.post_subscriptions(body.into())
         .await
