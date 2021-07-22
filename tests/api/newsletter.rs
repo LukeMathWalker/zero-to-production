@@ -1,5 +1,5 @@
 use crate::helpers::{spawn_app, ConfirmationLinks, TestApp};
-use wiremock::matchers::{method, path};
+use wiremock::matchers::{method, path, any};
 use wiremock::{Mock, ResponseTemplate};
 
 async fn create_unconfirmed_subscriber(app: &TestApp) -> ConfirmationLinks {
@@ -42,8 +42,7 @@ async fn newsletters_are_not_delivered_to_unconfirmed_subscribers() {
     let app = spawn_app().await;
     create_unconfirmed_subscriber(&app).await;
 
-    Mock::given(path("/email"))
-        .and(method("POST"))
+    Mock::given(any())
         .respond_with(ResponseTemplate::new(200))
         .expect(0)
         .mount(&app.email_server)
