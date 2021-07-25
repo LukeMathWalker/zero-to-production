@@ -1,12 +1,12 @@
 use actix_web::{web, HttpResponse};
 
-#[derive(serde::Serialize)]
+#[derive(serde::Deserialize)]
 pub struct BodyData {
     title: String,
     content: Content,
 }
 
-#[derive(serde::Serialize)]
+#[derive(serde::Deserialize)]
 pub struct Content {
     html: String,
     text: String,
