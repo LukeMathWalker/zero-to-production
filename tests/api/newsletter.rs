@@ -134,14 +134,21 @@ async fn requests_missing_authorization_are_rejected() {
 
     let response = reqwest::Client::new()
         .post(&format!("{}/newsletters", &app.address))
-        // The body should not matter - authentication must be performed
-        // BEFORE any further processing takes place.
-        .json(&serde_json::json!({}))
+        .json(&serde_json::json!({
+            "title": "Newsletter title",
+            "content": {
+                "text": "Newsletter body as plain text",
+                "html": "<p>Newsletter body as HTML</p>",
+            }
+        }))
         .send()
         .await
         .expect("Failed to execute request.");
 
     // Assert
     assert_eq!(401, response.status().as_u16());
-    assert_eq!(r#"Basic realm="publish""#, response.headers()["WWW-Authenticate"]);
+    assert_eq!(
+        r#"Basic realm="publish""#,
+        response.headers()["WWW-Authenticate"]
+    );
 }
