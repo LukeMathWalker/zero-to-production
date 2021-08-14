@@ -126,3 +126,22 @@ async fn newsletters_returns_400_for_invalid_data() {
         );
     }
 }
+
+#[actix_rt::test]
+async fn requests_missing_authorization_are_rejected() {
+    // Arrange
+    let app = spawn_app().await;
+
+    let response = reqwest::Client::new()
+        .post(&format!("{}/newsletters", &app.address))
+        // The body should not matter - authentication must be performed
+        // BEFORE any further processing takes place.
+        .json(&serde_json::json!({}))
+        .send()
+        .await
+        .expect("Failed to execute request.");
+
+    // Assert
+    assert_eq!(401, response.status().as_u16());
+    assert_eq!(r#"Basic realm="publish""#, response.headers()["WWW-Authenticate"]);
+}
