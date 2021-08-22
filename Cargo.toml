@@ -32,10 +32,10 @@ serde-aux = "1.0.1"
 unicode-segmentation = "1.7.1"
 validator = "0.12.0"
 rand = { version = "0.8", features=["std_rng"] }
-sha2 = { version = "0.9" }
 tracing-actix-web = "0.4.0-beta.8"
 anyhow = "1.0.40"
 base64 = "0.13.0"
+sha3 = "0.9"
 
 [dev-dependencies]
 once_cell = "1.7.2"
