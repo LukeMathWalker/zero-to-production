@@ -35,7 +35,6 @@ rand = { version = "0.8", features= ["std_rng"] }
 tracing-actix-web = "0.4.0-beta.8"
 anyhow = "1.0.40"
 base64 = "0.13.0"
-sha3 = "0.9"
 argon2 = { version = "0.3", features = ["std"] }
 
 [dev-dependencies]
