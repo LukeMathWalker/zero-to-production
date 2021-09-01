@@ -2,7 +2,7 @@ use crate::domain::{NewSubscriber, SubscriberEmail, SubscriberName};
 use actix_web::{web, HttpResponse};
 use chrono::Utc;
 use sqlx::PgPool;
-use std::convert::TryInto;
+use std::convert::{TryFrom, TryInto};
 use uuid::Uuid;
 
 #[derive(serde::Deserialize)]
@@ -11,13 +11,13 @@ pub struct FormData {
     name: String,
 }
 
-impl TryInto<NewSubscriber> for FormData {
+impl TryFrom<FormData> for NewSubscriber {
     type Error = String;
 
-    fn try_into(self) -> Result<NewSubscriber, Self::Error> {
-        let name = SubscriberName::parse(self.name)?;
-        let email = SubscriberEmail::parse(self.email)?;
-        Ok(NewSubscriber { email, name })
+    fn try_from(value: FormData) -> Result<Self, Self::Error> {
+        let name = SubscriberName::parse(value.name)?;
+        let email = SubscriberEmail::parse(value.email)?;
+        Ok(Self { email, name })
     }
 }
 
