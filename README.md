@@ -23,6 +23,7 @@ You can browse the project at the end of previous chapters by switching to their
 - [Chapter 7, Part 2](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part2)
 - [Chapter 8](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-08-part0)
 - [Chapter 9](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-09)
+- [Chapter 10](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part0)
 
 ## Pre-requisite
 
