@@ -13,8 +13,8 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "=4.0.0-beta.8"
-actix-http = "=3.0.0-beta.9"
+actix-web = "=4.0.0-beta.9"
+actix-http = "=3.0.0-beta.10"
 serde = "1.0.115"
 config = { version = "0.10.1", default-features = false, features = ["yaml"] }
 sqlx = { version = "0.5.5", default-features = false, features = [ "runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
@@ -29,7 +29,7 @@ tracing-log = "0.1.1"
 serde-aux = "1.0.1"
 unicode-segmentation = "1.7.1"
 validator = "0.12.0"
-tracing-actix-web = "0.4.0-beta.8"
+tracing-actix-web = "0.4.0-beta.12"
 
 [dev-dependencies]
 once_cell = "1.7.2"
