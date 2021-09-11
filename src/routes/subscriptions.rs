@@ -25,6 +25,7 @@ impl TryFrom<FormData> for NewSubscriber {
     }
 }
 
+#[allow(clippy::async_yields_async)]
 #[tracing::instrument(
     name = "Adding a new subscriber",
     skip(form, pool, email_client, base_url),
