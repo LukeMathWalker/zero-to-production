@@ -108,9 +108,7 @@ pub async fn spawn_app() -> TestApp {
     TestApp {
         address: format!("http://localhost:{}", application_port),
         port: application_port,
-        db_pool: get_connection_pool(&configuration.database)
-            .await
-            .expect("Failed to connect to the database"),
+        db_pool: get_connection_pool(&configuration.database),
         email_server,
     }
 }
