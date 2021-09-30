@@ -20,6 +20,7 @@ config = { version = "0.10.1", default-features = false, features = ["yaml"] }
 sqlx = { version = "0.5.5", default-features = false, features = [ "runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
 uuid = { version = "0.8.1", features = ["v4"] }
 chrono = "0.4.15"
+log = "0.4"
 tracing = "0.1.19"
 tracing-futures = "0.2.4"
 tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }

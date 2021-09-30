@@ -2507,6 +2507,7 @@ dependencies = [
  "chrono",
  "claim",
  "config",
+ "log",
  "once_cell",
  "reqwest",
  "serde",
