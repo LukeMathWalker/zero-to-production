@@ -22,6 +22,7 @@ sqlx = { version = "0.5.1", default-features = false, features = [ "runtime-acti
 uuid = { version = "0.8.1", features = ["v4"] }
 chrono = "0.4.15"
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls"] }
+log = "0.4"
 tracing = "0.1.19"
 tracing-futures = "0.2.4"
 tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }
