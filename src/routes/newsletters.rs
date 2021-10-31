@@ -80,7 +80,7 @@ fn basic_authentication(headers: &HeaderMap) -> Result<Credentials, anyhow::Erro
 }
 
 #[tracing::instrument(
-name = "Publish a newsletter issue", 
+    name = "Publish a newsletter issue", 
     skip(body, pool, email_client, request),
     fields(username=tracing::field::Empty, user_id=tracing::field::Empty)
 )]
