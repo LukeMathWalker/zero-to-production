@@ -41,7 +41,7 @@ pub async fn login(
 pub enum LoginError {
     #[error("Authentication failed.")]
     AuthError(#[source] anyhow::Error),
-    #[error(transparent)]
+    #[error("Something went wrong.")]
     UnexpectedError(#[from] anyhow::Error),
 }
 
@@ -52,10 +52,13 @@ impl std::fmt::Debug for LoginError {
 }
 
 impl ResponseError for LoginError {
+    fn error_response(&self) -> HttpResponse {
+        HttpResponse::build(self.status_code())
+            .insert_header((LOCATION, "/login"))
+            .finish()
+    }
+
     fn status_code(&self) -> StatusCode {
-        match self {
-            LoginError::UnexpectedError(_) => StatusCode::INTERNAL_SERVER_ERROR,
-            LoginError::AuthError(_) => StatusCode::UNAUTHORIZED,
-        }
+        StatusCode::SEE_OTHER
     }
 }
