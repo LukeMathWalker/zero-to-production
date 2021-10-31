@@ -53,8 +53,9 @@ impl std::fmt::Debug for LoginError {
 
 impl ResponseError for LoginError {
     fn error_response(&self) -> HttpResponse {
+        let encoded_error_message = urlencoding::Encoded::new(self.to_string());
         HttpResponse::build(self.status_code())
-            .insert_header((LOCATION, "/login"))
+            .insert_header((LOCATION, format!("/login?error={}", encoded_error_message)))
             .finish()
     }
 
