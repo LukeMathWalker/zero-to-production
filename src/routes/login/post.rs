@@ -20,7 +20,7 @@ pub struct FormData {
 pub async fn login(
     form: web::Form<FormData>,
     pool: web::Data<PgPool>,
-    secret: web::Data<Vec<u8>>,
+    secret: web::Data<String>,
 ) -> Result<HttpResponse, InternalError<LoginError>> {
     let credentials = Credentials {
         username: form.0.username,
@@ -41,7 +41,7 @@ pub async fn login(
             };
             let query_string = format!("error={}", urlencoding::Encoded::new(e.to_string()));
             let hmac_tag = {
-                let mut mac = Hmac::<sha2::Sha256>::new_from_slice(&secret).unwrap();
+                let mut mac = Hmac::<sha2::Sha256>::new_from_slice(secret.as_bytes()).unwrap();
                 mac.update(query_string.as_bytes());
                 mac.finalize().into_bytes()
             };
