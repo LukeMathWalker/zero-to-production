@@ -38,6 +38,7 @@ anyhow = "1.0.40"
 base64 = "0.13.0"
 argon2 = { version = "0.3", features = ["std"] }
 urlencoding = "2"
+htmlescape = "0.3"
 
 [dev-dependencies]
 once_cell = "1.7.2"
