@@ -1,5 +1,6 @@
 use crate::authentication::{validate_credentials, AuthError, Credentials};
 use crate::routes::error_chain_fmt;
+use actix_web::cookie::Cookie;
 use actix_web::error::InternalError;
 use actix_web::http::header::LOCATION;
 use actix_web::web;
@@ -39,6 +40,7 @@ pub async fn login(
             };
             let response = HttpResponse::SeeOther()
                 .insert_header((LOCATION, "/login"))
+                .cookie(Cookie::new("_flash", e.to_string()))
                 .finish();
             Err(InternalError::from_response(e, response))
         }
@@ -47,9 +49,9 @@ pub async fn login(
 
 #[derive(thiserror::Error)]
 pub enum LoginError {
-    #[error("Authentication failed.")]
+    #[error("Authentication failed")]
     AuthError(#[source] anyhow::Error),
-    #[error("Something went wrong.")]
+    #[error("Something went wrong")]
     UnexpectedError(#[from] anyhow::Error),
 }
 
