@@ -1,5 +1,7 @@
+use actix_web::cookie::Cookie;
 use actix_web::http::header::ContentType;
 use actix_web::{web, HttpResponse};
+use time::Duration;
 
 pub async fn login_form(request: web::HttpRequest) -> HttpResponse {
     let error_html = match request.cookie("_flash") {
@@ -10,6 +12,11 @@ pub async fn login_form(request: web::HttpRequest) -> HttpResponse {
     };
     HttpResponse::Ok()
         .content_type(ContentType::html())
+        .cookie(
+            Cookie::build("_flash", "")
+                .max_age(Duration::zero())
+                .finish(),
+        )
         .body(format!(
             r#"<!DOCTYPE html>
 <html lang="en">
