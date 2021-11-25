@@ -38,7 +38,6 @@ base64 = "0.13.0"
 argon2 = { version = "0.3", features = ["std"] }
 urlencoding = "2"
 htmlescape = "0.3"
-time = "0.2"
 actix-web-flash-messages = { version = "0.2.4", features = ["cookies"] }
 
 [dev-dependencies]
