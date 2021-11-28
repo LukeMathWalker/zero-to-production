@@ -39,6 +39,7 @@ argon2 = { version = "0.3", features = ["std"] }
 urlencoding = "2"
 htmlescape = "0.3"
 actix-web-flash-messages = { version = "0.2.4", features = ["cookies"] }
+actix-redis = "0.10.0-beta.3"
 
 [dev-dependencies]
 once_cell = "1.7.2"

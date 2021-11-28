@@ -3,6 +3,7 @@ use crate::email_client::EmailClient;
 use crate::routes::{
     confirm, health_check, home, login, login_form, publish_newsletter, subscribe,
 };
+use actix_redis::RedisSession;
 use actix_web::cookie::Key;
 use actix_web::dev::Server;
 use actix_web::web::Data;
@@ -49,6 +50,7 @@ impl Application {
             email_client,
             configuration.application.base_url,
             configuration.application.hmac_secret,
+            configuration.redis_uri,
         )?;
 
         Ok(Self { port, server })
@@ -78,6 +80,7 @@ fn run(
     email_client: EmailClient,
     base_url: String,
     hmac_secret: String,
+    redis_uri: String,
 ) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
     let email_client = Data::new(email_client);
@@ -87,6 +90,15 @@ fn run(
     let server = HttpServer::new(move || {
         App::new()
             .wrap(message_framework.clone())
+            .wrap(
+                RedisSession::new(redis_uri.clone(), hmac_secret.as_bytes())
+                    .cookie_secure(true)
+                    .cookie_http_only(true)
+                    // Use a non-persistent cookie for session token
+                    .cookie_max_age(None)
+                    // Use an opaque name for the session cookie, as recommended by OWASP
+                    .cookie_name("id"),
+            )
             .wrap(TracingLogger::default())
             .route("/", web::get().to(home))
             .route("/login", web::get().to(login_form))
