@@ -52,6 +52,3 @@ serde_json = "1.0.61"
 actix-rt = "2"
 tokio = { version = "1", features = ["macros"] }
 linkify = "0.5.0"
-
-[patch.crates-io]
-cookie_store = { git = "https://github.com/LukeMathWalker/cookie_store", branch = "special-case-localhost" }
