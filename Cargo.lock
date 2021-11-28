@@ -3173,6 +3173,7 @@ version = "0.1.0"
 dependencies = [
  "actix-redis",
  "actix-rt",
+ "actix-session",
  "actix-web",
  "actix-web-flash-messages",
  "anyhow",
