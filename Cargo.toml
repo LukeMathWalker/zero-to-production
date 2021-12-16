@@ -18,7 +18,7 @@ actix-web = "=4.0.0-beta.14"
 serde = "1.0.115"
 config = { version = "0.10.1", default-features = false, features = ["yaml"] }
 sqlx = { version = "0.5.1", default-features = false, features = [ "runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
-uuid = { version = "0.8.1", features = ["v4"] }
+uuid = { version = "0.8.1", features = ["v4", "serde"] }
 chrono = "0.4.15"
 reqwest = { version = "0.11", default-features = false, features = ["json", "rustls-tls", "cookies"] }
 log = "0.4"
