@@ -125,7 +125,7 @@ dependencies = [
 [[package]]
 name = "actix-session"
 version = "0.5.0-beta.5"
-source = "git+https://github.com/LukeMathWalker/actix-extras?branch=rework-actix-session#683aaa942f3f3a539278da33b6058f70c96f37d9"
+source = "git+https://github.com/LukeMathWalker/actix-extras?branch=rework-actix-session#1efb963b94ec47b29dd7f76ae3a7a759878da920"
 dependencies = [
  "actix-service",
  "actix-utils",

@@ -1,6 +1,6 @@
 use crate::authentication::{validate_credentials, AuthError, Credentials};
 use crate::routes::error_chain_fmt;
-use actix_session::Session;
+use crate::session_state::TypedSession;
 use actix_web::error::InternalError;
 use actix_web::http::header::LOCATION;
 use actix_web::web;
@@ -21,7 +21,7 @@ pub struct FormData {
 pub async fn login(
     form: web::Form<FormData>,
     pool: web::Data<PgPool>,
-    session: Session,
+    session: TypedSession,
 ) -> Result<HttpResponse, InternalError<LoginError>> {
     let credentials = Credentials {
         username: form.0.username,
@@ -31,7 +31,9 @@ pub async fn login(
     match validate_credentials(credentials, &pool).await {
         Ok(user_id) => {
             tracing::Span::current().record("user_id", &tracing::field::display(&user_id));
-            session.insert("user_id", user_id);
+            session
+                .insert_user_id(user_id)
+                .map_err(|e| login_redirect(LoginError::UnexpectedError(e.into())))?;
             Ok(HttpResponse::SeeOther()
                 .insert_header((LOCATION, "/admin/dashboard"))
                 .finish())
@@ -41,13 +43,18 @@ pub async fn login(
                 AuthError::InvalidCredentials(_) => LoginError::AuthError(e.into()),
                 AuthError::UnexpectedError(_) => LoginError::UnexpectedError(e.into()),
             };
-            FlashMessage::error(e.to_string()).send();
-            let response = HttpResponse::SeeOther()
-                .insert_header((LOCATION, "/login"))
-                .finish();
-            Err(InternalError::from_response(e, response))
+            Err(login_redirect(e))
         }
     }
+}
+
+// Redirect to the login page with an error message.
+fn login_redirect(e: LoginError) -> InternalError<LoginError> {
+    FlashMessage::error(e.to_string()).send();
+    let response = HttpResponse::SeeOther()
+        .insert_header((LOCATION, "/login"))
+        .finish();
+    InternalError::from_response(e, response)
 }
 
 #[derive(thiserror::Error)]
