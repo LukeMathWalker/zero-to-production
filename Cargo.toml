@@ -13,7 +13,7 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "=4.0.0-beta.14"
+actix-web = "=4.0.0-beta.15"
 
 serde = "1.0.115"
 config = { version = "0.10.1", default-features = false, features = ["yaml"] }
