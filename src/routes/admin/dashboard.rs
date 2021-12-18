@@ -1,13 +1,9 @@
 use crate::session_state::TypedSession;
+use crate::utils::e500;
 use actix_web::http::header::{ContentType, LOCATION};
 use actix_web::{web, HttpResponse};
 use anyhow::Context;
 use sqlx::PgPool;
-
-// Return an opaque 500 while preserving the error root cause for logging.
-fn e500<T>(e: T) -> actix_web::error::InternalError<T> {
-    actix_web::error::InternalError::from_response(e, HttpResponse::InternalServerError().finish())
-}
 
 pub async fn admin_dashboard(
     session: TypedSession,
