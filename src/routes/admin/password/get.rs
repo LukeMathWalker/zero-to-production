@@ -17,6 +17,33 @@ pub async fn change_password_form(session: TypedSession) -> Result<HttpResponse,
     <title>Change Password</title>
 </head>
 <body>
+    <form action="/admin/password" method="post">
+        <label>Old password
+            <input
+                type="password"
+                placeholder="Enter old password"
+                name="old_password"
+            />
+        </label>
+        <br />
+        <label>New password
+            <input
+                type="password"
+                placeholder="Enter new password"
+                name="new_password"
+            />
+        </label>
+        <br />
+        <label>Confirm new password
+            <input
+                type="password"
+                placeholder="Type the new password again"
+                name="new_password_check"
+            />
+        </label>
+        <br />
+        <button type="submit">Change password</button>
+    </form>
     <p><a href="/admin/dashboard">&lt;- Back</a></p>
 </body>
 </html>"#,
