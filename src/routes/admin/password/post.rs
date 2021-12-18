@@ -2,6 +2,7 @@ use crate::session_state::TypedSession;
 use crate::utils::e500;
 use actix_web::http::header::LOCATION;
 use actix_web::{web, HttpResponse};
+use actix_web_flash_messages::FlashMessage;
 
 #[derive(serde::Deserialize)]
 pub struct FormData {
@@ -19,5 +20,14 @@ pub async fn change_password(
             .insert_header((LOCATION, "/login"))
             .finish());
     };
+    if form.new_password != form.new_password_check {
+        FlashMessage::error(
+            "You entered two different new passwords - the field values must match.",
+        )
+        .send();
+        return Ok(HttpResponse::SeeOther()
+            .insert_header((LOCATION, "/admin/password"))
+            .finish());
+    }
     todo!()
 }
