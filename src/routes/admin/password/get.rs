@@ -1,6 +1,6 @@
 use crate::session_state::TypedSession;
-use crate::utils::e500;
-use actix_web::http::header::{ContentType, LOCATION};
+use crate::utils::{e500, see_other};
+use actix_web::http::header::{ContentType};
 use actix_web::HttpResponse;
 use actix_web_flash_messages::IncomingFlashMessages;
 use std::fmt::Write;
@@ -10,9 +10,7 @@ pub async fn change_password_form(
     flash_messages: IncomingFlashMessages,
 ) -> Result<HttpResponse, actix_web::Error> {
     if session.get_user_id().map_err(e500)?.is_none() {
-        return Ok(HttpResponse::SeeOther()
-            .insert_header((LOCATION, "/login"))
-            .finish());
+        return Ok(see_other("/login"));
     };
 
     let mut msg_html = String::new();
@@ -32,11 +30,11 @@ pub async fn change_password_form(
 <body>
     {}
     <form action="/admin/password" method="post">
-        <label>Old password
+        <label>Current password
             <input
                 type="password"
-                placeholder="Enter old password"
-                name="old_password"
+                placeholder="Enter current password"
+                name="current_password"
             />
         </label>
         <br />
