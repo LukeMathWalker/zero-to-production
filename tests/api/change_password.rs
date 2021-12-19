@@ -121,8 +121,6 @@ async fn changing_password_works() {
         "password": &app.test_user.password
     });
     let response = app.post_login(&login_body).await;
-
-    // Assert
     assert_eq!(response.status().as_u16(), 303);
     assert_eq!(
         response.headers().get("Location").unwrap(),
@@ -137,8 +135,6 @@ async fn changing_password_works() {
             "new_password_check": &new_password,
         }))
         .await;
-
-    // Assert
     assert_eq!(response.status().as_u16(), 303);
     assert_eq!(
         response.headers().get("Location").unwrap(),
@@ -148,20 +144,24 @@ async fn changing_password_works() {
     // Act - Part 3 - Follow the redirect
     let response = app.get_change_password().await;
     let html_page = response.text().await.unwrap();
-    assert!(html_page.contains(r#"<p><i>Your password has been changed successfully!</i></p>"#));
+    assert!(html_page.contains(r#"<p><i>Your password has been changed.</i></p>"#));
 
     // Act - Part 4 - Logout
     let response = app.post_logout().await;
+    assert_eq!(response.status().as_u16(), 303);
+    assert_eq!(response.headers().get("Location").unwrap(), "/login");
+
+    // Act - Part 5 - Follow the redirect
+    let response = app.get_login().await;
+    let html_page = response.text().await.unwrap();
     assert!(html_page.contains(r#"<p><i>You have successfully logged out.</i></p>"#));
 
-    // Act - Part 5 - Login using the new password
+    // Act - Part 6 - Login using the new password
     let login_body = serde_json::json!({
         "username": &app.test_user.username,
         "password": &new_password
     });
     let response = app.post_login(&login_body).await;
-
-    // Assert
     assert_eq!(response.status().as_u16(), 303);
     assert_eq!(
         response.headers().get("Location").unwrap(),
