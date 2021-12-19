@@ -148,11 +148,11 @@ async fn changing_password_works() {
     // Act - Part 3 - Follow the redirect
     let response = app.get_change_password().await;
     let html_page = response.text().await.unwrap();
-    assert!(!html_page.contains(r#"<p><i>Your password has been changed successfully!</i></p>"#));
+    assert!(html_page.contains(r#"<p><i>Your password has been changed successfully!</i></p>"#));
 
     // Act - Part 4 - Logout
     let response = app.post_logout().await;
-    assert!(!html_page.contains(r#"<p><i>You have successfully logged out.</i></p>"#));
+    assert!(html_page.contains(r#"<p><i>You have successfully logged out.</i></p>"#));
 
     // Act - Part 5 - Login using the new password
     let login_body = serde_json::json!({
