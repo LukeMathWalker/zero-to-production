@@ -1,6 +1,6 @@
 FROM lukemathwalker/cargo-chef:latest-rust-1.53.0 as chef
 WORKDIR /app
-RUN apt install lld -y
+RUN apt update && apt install lld -y
 
 FROM chef as planner
 COPY . .
