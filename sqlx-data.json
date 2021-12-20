@@ -1,5 +1,18 @@
 {
   "db": "PostgreSQL",
+  "2880480077b654e38b63f423ab40680697a500ffe1af1d1b39108910594b581b": {
+    "query": "\n        UPDATE users\n        SET password_hash = $1\n        WHERE user_id = $2\n        ",
+    "describe": {
+      "columns": [],
+      "parameters": {
+        "Left": [
+          "Text",
+          "Uuid"
+        ]
+      },
+      "nullable": []
+    }
+  },
   "33b11051e779866db9aeb86d28a59db07a94323ffdc59a5a2c1da694ebe9a65f": {
     "query": "\n        SELECT username\n        FROM users\n        WHERE user_id = $1\n        ",
     "describe": {
