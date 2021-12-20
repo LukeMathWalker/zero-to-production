@@ -1,6 +1,8 @@
 FROM lukemathwalker/cargo-chef:latest-rust-1.53.0 as chef
 WORKDIR /app
 
+RUN sudo apt install lld -y
+
 FROM chef as planner
 COPY . .
 # Compute a lock-like file for our project
