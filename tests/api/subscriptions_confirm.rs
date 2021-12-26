@@ -2,7 +2,7 @@ use crate::helpers::spawn_app;
 use wiremock::matchers::{method, path};
 use wiremock::{Mock, ResponseTemplate};
 
-#[actix_rt::test]
+#[tokio::test]
 async fn confirmations_without_token_are_rejected_with_a_400() {
     // Arrange
     let app = spawn_app().await;
@@ -16,7 +16,7 @@ async fn confirmations_without_token_are_rejected_with_a_400() {
     assert_eq!(response.status().as_u16(), 400);
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn the_link_returned_by_subscribe_returns_a_200_if_called() {
     // Arrange
     let app = spawn_app().await;
@@ -39,7 +39,7 @@ async fn the_link_returned_by_subscribe_returns_a_200_if_called() {
     assert_eq!(response.status().as_u16(), 200);
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn clicking_on_the_confirmation_link_confirms_a_subscriber() {
     // Arrange
     let app = spawn_app().await;
