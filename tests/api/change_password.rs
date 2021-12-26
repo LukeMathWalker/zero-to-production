@@ -1,7 +1,7 @@
 use crate::helpers::spawn_app;
 use uuid::Uuid;
 
-#[actix_rt::test]
+#[tokio::test]
 async fn you_must_be_logged_in_to_see_the_change_password_form() {
     // Arrange
     let app = spawn_app().await;
@@ -14,7 +14,7 @@ async fn you_must_be_logged_in_to_see_the_change_password_form() {
     assert_eq!(response.headers().get("Location").unwrap(), "/login");
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn you_must_be_logged_in_to_change_your_password() {
     // Arrange
     let app = spawn_app().await;
@@ -34,7 +34,7 @@ async fn you_must_be_logged_in_to_change_your_password() {
     assert_eq!(response.headers().get("Location").unwrap(), "/login");
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn new_password_fields_must_match() {
     // Arrange
     let app = spawn_app().await;
@@ -73,7 +73,7 @@ async fn new_password_fields_must_match() {
     ));
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn current_password_must_be_valid() {
     // Arrange
     let app = spawn_app().await;
@@ -109,7 +109,7 @@ async fn current_password_must_be_valid() {
     assert!(html_page.contains("<p><i>The current password is incorrect.</i></p>"));
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn changing_password_works() {
     // Arrange
     let app = spawn_app().await;

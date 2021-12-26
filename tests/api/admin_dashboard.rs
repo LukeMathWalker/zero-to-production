@@ -1,6 +1,6 @@
 use crate::helpers::spawn_app;
 
-#[actix_rt::test]
+#[tokio::test]
 async fn you_must_be_logged_in_to_access_the_admin_password() {
     // Arrange
     let app = spawn_app().await;

@@ -1,6 +1,6 @@
 use crate::helpers::spawn_app;
 
-#[actix_rt::test]
+#[tokio::test]
 async fn an_error_flash_message_is_set_on_failure() {
     // Arrange
     let app = spawn_app().await;
@@ -27,7 +27,7 @@ async fn an_error_flash_message_is_set_on_failure() {
     assert!(!html_page.contains(r#"<p><i>Authentication failed</i></p>"#));
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn redirect_to_admin_dashboard_after_login_success() {
     // Arrange
     let app = spawn_app().await;
