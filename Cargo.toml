@@ -13,8 +13,8 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "=4.0.0-beta.9"
-actix-http = "=3.0.0-beta.10"
+actix-web = "=4.0.0-beta.15"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 serde = "1.0.115"
 config = { version = "0.10.1", default-features = false, features = ["yaml"] }
 sqlx = { version = "0.5.5", default-features = false, features = [ "runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate"] }
@@ -22,13 +22,11 @@ uuid = { version = "0.8.1", features = ["v4"] }
 chrono = "0.4.15"
 tracing = "0.1.19"
 tracing-futures = "0.2.4"
-tracing-subscriber = { version = "0.2.12", features = ["registry", "env-filter"] }
-tracing-bunyan-formatter = "0.1.6"
+tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
+tracing-bunyan-formatter = "0.3.1"
 tracing-log = "0.1.1"
-tracing-actix-web = "0.4.0-beta.12"
+tracing-actix-web = "0.5.0-beta.6"
 
 [dev-dependencies]
 reqwest = { version = "0.11", features = ["json"] }
-actix-rt = "2"
-tokio = "1"
 once_cell = "1.7.2"
