@@ -2,7 +2,10 @@ use crate::domain::SubscriberEmail;
 use crate::email_client::EmailClient;
 use crate::routes::error_chain_fmt;
 use crate::telemetry::spawn_blocking_with_tracing;
-use actix_web::http::{HeaderMap, HeaderValue, StatusCode};
+use actix_web::http::{
+    header::{HeaderMap, HeaderValue},
+    StatusCode,
+};
 use actix_web::{web, HttpResponse, ResponseError};
 use anyhow::Context;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};

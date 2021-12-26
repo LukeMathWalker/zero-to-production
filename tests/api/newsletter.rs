@@ -128,7 +128,7 @@ async fn newsletters_returns_400_for_invalid_data() {
     }
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn requests_missing_authorization_are_rejected() {
     // Arrange
     let app = spawn_app().await;
@@ -154,7 +154,7 @@ async fn requests_missing_authorization_are_rejected() {
     );
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn non_existing_user_is_rejected() {
     // Arrange
     let app = spawn_app().await;
@@ -184,7 +184,7 @@ async fn non_existing_user_is_rejected() {
     );
 }
 
-#[actix_rt::test]
+#[tokio::test]
 async fn invalid_password_is_rejected() {
     // Arrange
     let app = spawn_app().await;
