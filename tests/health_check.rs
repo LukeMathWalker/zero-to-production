@@ -11,7 +11,7 @@ fn spawn_app() -> String {
     format!("http://127.0.0.1:{}", port)
 }
 
-#[actix_web::test]
+#[tokio::test]
 async fn health_check_works() {
     // Arrange
     let address = spawn_app();
