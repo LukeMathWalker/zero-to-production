@@ -1,18 +1,20 @@
+use secrecy::ExposeSecret;
 use sqlx::postgres::PgPool;
 use std::net::TcpListener;
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
 use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
-#[actix_web::main]
+#[tokio::main]
 async fn main() -> std::io::Result<()> {
     let subscriber = get_subscriber("zero2prod".into(), "info".into(), std::io::stdout);
     init_subscriber(subscriber);
 
     let configuration = get_configuration().expect("Failed to read configuration.");
-    let connection_pool = PgPool::connect(&configuration.database.connection_string())
-        .await
-        .expect("Failed to connect to Postgres.");
+    let connection_pool =
+        PgPool::connect(&configuration.database.connection_string().expose_secret())
+            .await
+            .expect("Failed to connect to Postgres.");
 
     // Here we choose to bind explicitly to localhost, 127.0.0.1, for security
     // reasons. This binding may cause issues in some environments. For example,
