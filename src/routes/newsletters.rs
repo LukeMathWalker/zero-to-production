@@ -8,6 +8,7 @@ use actix_web::http::{
 };
 use actix_web::{web, HttpResponse, ResponseError};
 use anyhow::Context;
+use secrecy::Secret;
 use sqlx::PgPool;
 
 #[derive(serde::Deserialize)]
@@ -79,7 +80,10 @@ fn basic_authentication(headers: &HeaderMap) -> Result<Credentials, anyhow::Erro
         .ok_or_else(|| anyhow::anyhow!("A password must be provided in 'Basic' auth."))?
         .to_string();
 
-    Ok(Credentials { username, password })
+    Ok(Credentials {
+        username,
+        password: Secret::new(password),
+    })
 }
 
 #[tracing::instrument(

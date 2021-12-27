@@ -4,13 +4,14 @@ use crate::session_state::TypedSession;
 use crate::utils::{e500, see_other};
 use actix_web::{web, HttpResponse};
 use actix_web_flash_messages::FlashMessage;
+use secrecy::{ExposeSecret, Secret};
 use sqlx::PgPool;
 
 #[derive(serde::Deserialize)]
 pub struct FormData {
-    current_password: String,
-    new_password: String,
-    new_password_check: String,
+    current_password: Secret<String>,
+    new_password: Secret<String>,
+    new_password_check: Secret<String>,
 }
 
 pub async fn change_password(
@@ -24,7 +25,7 @@ pub async fn change_password(
     };
     let user_id = user_id.unwrap();
 
-    if form.new_password != form.new_password_check {
+    if form.new_password.expose_secret() != form.new_password_check.expose_secret() {
         FlashMessage::error(
             "You entered two different new passwords - the field values must match.",
         )
