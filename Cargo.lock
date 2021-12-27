@@ -2712,7 +2712,6 @@ dependencies = [
  "tracing",
  "tracing-actix-web",
  "tracing-bunyan-formatter",
- "tracing-futures",
  "tracing-log",
  "tracing-subscriber",
  "unicode-segmentation",
