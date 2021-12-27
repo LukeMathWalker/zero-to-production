@@ -9,6 +9,7 @@ use actix_web::http::{
 use actix_web::{web, HttpResponse, ResponseError};
 use anyhow::Context;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
+use secrecy::{ExposeSecret, Secret};
 use sqlx::PgPool;
 
 #[derive(serde::Deserialize)]
@@ -57,7 +58,7 @@ impl ResponseError for PublishError {
 
 struct Credentials {
     username: String,
-    password: String,
+    password: Secret<String>,
 }
 
 fn basic_authentication(headers: &HeaderMap) -> Result<Credentials, anyhow::Error> {
@@ -85,14 +86,17 @@ fn basic_authentication(headers: &HeaderMap) -> Result<Credentials, anyhow::Erro
         .ok_or_else(|| anyhow::anyhow!("A password must be provided in 'Basic' auth."))?
         .to_string();
 
-    Ok(Credentials { username, password })
+    Ok(Credentials {
+        username,
+        password: Secret::new(password),
+    })
 }
 
 #[tracing::instrument(name = "Get stored credentials", skip(username, pool))]
 async fn get_stored_credentials(
     username: &str,
     pool: &PgPool,
-) -> Result<Option<(uuid::Uuid, String)>, anyhow::Error> {
+) -> Result<Option<(uuid::Uuid, Secret<String>)>, anyhow::Error> {
     let row = sqlx::query!(
         r#"
         SELECT user_id, password_hash
@@ -104,7 +108,7 @@ async fn get_stored_credentials(
     .fetch_optional(pool)
     .await
     .context("Failed to performed a query to retrieve stored credentials.")?
-    .map(|row| (row.user_id, row.password_hash));
+    .map(|row| (row.user_id, Secret::new(row.password_hash)));
     Ok(row)
 }
 
@@ -114,10 +118,12 @@ async fn validate_credentials(
     pool: &PgPool,
 ) -> Result<uuid::Uuid, PublishError> {
     let mut user_id = None;
-    let mut expected_password_hash = "$argon2id$v=19$m=15000,t=2,p=1$\
+    let mut expected_password_hash = Secret::new(
+        "$argon2id$v=19$m=15000,t=2,p=1$\
         gZiV/M1gPc22ElAH/Jh1Hw$\
         CWOrkoo7oJBQ/iyh7uJ0LO2aLEfrHwTWllSAxT0zRno"
-        .to_string();
+            .to_string(),
+    );
 
     if let Some((stored_user_id, stored_password_hash)) =
         get_stored_credentials(&credentials.username, pool)
@@ -143,15 +149,18 @@ async fn validate_credentials(
     skip(expected_password_hash, password_candidate)
 )]
 fn verify_password_hash(
-    expected_password_hash: String,
-    password_candidate: String,
+    expected_password_hash: Secret<String>,
+    password_candidate: Secret<String>,
 ) -> Result<(), PublishError> {
-    let expected_password_hash = PasswordHash::new(&expected_password_hash)
+    let expected_password_hash = PasswordHash::new(expected_password_hash.expose_secret())
         .context("Failed to parse hash in PHC string format.")
         .map_err(PublishError::UnexpectedError)?;
 
     Argon2::default()
-        .verify_password(password_candidate.as_bytes(), &expected_password_hash)
+        .verify_password(
+            password_candidate.expose_secret().as_bytes(),
+            &expected_password_hash,
+        )
         .context("Invalid password.")
         .map_err(PublishError::AuthError)
 }
