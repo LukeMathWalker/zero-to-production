@@ -21,9 +21,9 @@ dependencies = [
 
 [[package]]
 name = "actix-http"
-version = "3.0.0-beta.16"
+version = "3.0.0-beta.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6294c508c1413346857838356f53f45dbfd257ea31dca19470d9ce78750a7d37"
+checksum = "dac76407e2be239b5e544c9d83bdac4a0d68ae188031ac0424aa3e4868a669be"
 dependencies = [
  "actix-codec",
  "actix-rt",
@@ -39,12 +39,11 @@ dependencies = [
  "encoding_rs",
  "flate2",
  "futures-core",
- "futures-task",
  "h2",
  "http",
  "httparse",
  "httpdate",
- "itoa 0.4.8",
+ "itoa 1.0.1",
  "language-tags",
  "local-channel",
  "log",
@@ -52,7 +51,7 @@ dependencies = [
  "percent-encoding",
  "pin-project-lite",
  "rand 0.8.4",
- "sha-1",
+ "sha-1 0.10.0",
  "smallvec",
  "zstd",
 ]
@@ -94,9 +93,9 @@ dependencies = [
 
 [[package]]
 name = "actix-server"
-version = "2.0.0-rc.1"
+version = "2.0.0-rc.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78c9b22794b8af1c2e02434873ef858f2a7db40dbbf861ce77a04cd81ac6b767"
+checksum = "29b7894a5b47aa84e15fbe8d89ee953568296a3739c5f6e6b5858802a561390c"
 dependencies = [
  "actix-rt",
  "actix-service",
@@ -154,9 +153,9 @@ dependencies = [
 
 [[package]]
 name = "actix-web"
-version = "4.0.0-beta.15"
+version = "4.0.0-beta.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4609cf57246040316642d4dc4c03d7f3d4a083a892122829dbd9e6ec8db7cd67"
+checksum = "dcc9a3e9642e035fe81cb9f7ef7eb98e7a049452d5d65637aebeab89c1849e4c"
 dependencies = [
  "actix-codec",
  "actix-http",
@@ -175,7 +174,7 @@ dependencies = [
  "encoding_rs",
  "futures-core",
  "futures-util",
- "itoa 0.4.8",
+ "itoa 1.0.1",
  "language-tags",
  "log",
  "mime",
@@ -518,9 +517,9 @@ dependencies = [
 
 [[package]]
 name = "claim"
-version = "0.4.0"
+version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68ad37958d55b29a7088909368968d2fe876a24c203f8441195130f3b15194b9"
+checksum = "f81099d6bb72e1df6d50bb2347224b666a670912bb7f06dbe867a4a070ab3ce8"
 dependencies = [
  "autocfg",
 ]
@@ -553,6 +552,17 @@ name = "config"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "19b076e143e1d9538dde65da30f8481c2a6c44040edb8e02b9bf1351edb92ce3"
+dependencies = [
+ "lazy_static",
+ "nom 5.1.2",
+ "serde",
+]
+
+[[package]]
+name = "config"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b1b9d958c2b1368a663f05538fc1b5975adce1e19f435acceae987aceeeb369"
 dependencies = [
  "lazy_static",
  "nom 5.1.2",
@@ -736,7 +746,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3d126179d86aee4556e54f5f3c6bf6d9884e7cc52cef82f77ee6f90a7747616d"
 dependencies = [
  "async-trait",
- "config",
+ "config 0.10.1",
  "crossbeam-queue",
  "num_cpus",
  "serde",
@@ -1398,9 +1408,9 @@ checksum = "7fb9b38af92608140b86b693604b9ffcc5824240a484d1ecd4795bacb2fe88f3"
 
 [[package]]
 name = "linkify"
-version = "0.5.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "78d59d732ba6d7eeefc418aab8057dc8e3da4374bd5802ffa95bebc04b4d1dfb"
+checksum = "ccbcd666d915aa3ae3c3774999a9e20b2776a018309b8159d07df062b91f45e8"
 dependencies = [
  "memchr",
 ]
@@ -1770,9 +1780,9 @@ checksum = "dbf0c48bc1d91375ae5c3cd81e3722dff1abcf81a30960240640d223f59fe0e5"
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.35"
+version = "1.0.36"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "392a54546fda6b7cc663379d0e6ce8b324cf88aecc5a499838e1be9781bdce2e"
+checksum = "c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029"
 dependencies = [
  "unicode-xid",
 ]
@@ -1820,9 +1830,9 @@ dependencies = [
 
 [[package]]
 name = "quote"
-version = "1.0.10"
+version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "38bc8cc6a5f2e3655e0899c1b848643b2562f853f114bfec7be120678e3ace05"
+checksum = "47aa80447ce4daf1717500037052af176af5d38cc3e571d9ec1c7353fc10c87d"
 dependencies = [
  "proc-macro2",
 ]
@@ -2199,9 +2209,9 @@ dependencies = [
 
 [[package]]
 name = "serde-aux"
-version = "1.1.0"
+version = "3.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "905f2fc9f3d1574e8b5923a58118240021f01d4e239673937ffb9f42707a4f22"
+checksum = "93abf9799c576f004252b2a05168d58527fb7c54de12e94b4d12fe3475ffad24"
 dependencies = [
  "chrono",
  "serde",
@@ -2265,6 +2275,17 @@ dependencies = [
  "cpufeatures",
  "digest 0.9.0",
  "opaque-debug",
+]
+
+[[package]]
+name = "sha-1"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "028f48d513f9678cda28f6e4064755b3fbb2af6acd672f2c209b62323f7aea0f"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "digest 0.10.1",
 ]
 
 [[package]]
@@ -2392,7 +2413,7 @@ dependencies = [
  "rustls 0.19.1",
  "serde",
  "serde_json",
- "sha-1",
+ "sha-1 0.9.8",
  "sha2",
  "smallvec",
  "sqlformat",
@@ -2756,9 +2777,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-actix-web"
-version = "0.5.0-beta.6"
+version = "0.5.0-beta.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "940f76971e1a1ca2c64e8f915aec14acbc61a5b1c1c177dedf64eb8dd41b204d"
+checksum = "2f00575e655451448b6ebde455528917498b3e04bdea7616784d807c49dc0491"
 dependencies = [
  "actix-web",
  "pin-project",
@@ -2935,9 +2956,9 @@ dependencies = [
 
 [[package]]
 name = "validator"
-version = "0.12.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "841d6937c33ec6039d8071bcf72933146b5bbe378d645d8fa59bdadabfc2a249"
+checksum = "6d0f08911ab0fee2c5009580f04615fa868898ee57de10692a45da0c3bcc3e5e"
 dependencies = [
  "idna",
  "lazy_static",
@@ -2951,9 +2972,13 @@ dependencies = [
 
 [[package]]
 name = "validator_types"
-version = "0.12.0"
+version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad9680608df133af2c1ddd5eaf1ddce91d60d61b6bc51494ef326458365a470a"
+checksum = "ded9d97e1d42327632f5f3bae6403c04886e2de3036261ef42deebd931a6a291"
+dependencies = [
+ "proc-macro2",
+ "syn",
+]
 
 [[package]]
 name = "vcpkg"
@@ -3191,7 +3216,7 @@ dependencies = [
  "base64",
  "chrono",
  "claim",
- "config",
+ "config 0.11.0",
  "fake",
  "htmlescape",
  "linkify",
