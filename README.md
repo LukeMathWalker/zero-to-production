@@ -1,4 +1,4 @@
-# Zero To Production / Code
+# Zero To Production / Code (Chapter 10 - Part 1)
 
 <div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://www.zero2prod.com/assets/img/zero2prod_banner.webp" /></a></div>
 
@@ -23,7 +23,8 @@ You can browse the project at the end of previous chapters by switching to their
 - [Chapter 7, Part 2](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part2)
 - [Chapter 8](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-08-part0)
 - [Chapter 9](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-09)
-- [Chapter 10](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part0)
+- [Chapter 10, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part0)
+- [Chapter 10, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part1)
 
 ## Pre-requisite
 
@@ -53,18 +54,3 @@ Using `cargo`:
 ```bash
 cargo test 
 ```
-
-## License
-
-<sup>
-Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
-2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
-</sup>
-
-<br>
-
-<sub>
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
-</sub>

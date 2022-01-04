@@ -1,4 +1,4 @@
-use actix_web::rt::task::JoinHandle;
+use tokio::task::JoinHandle;
 use tracing::subscriber::set_global_default;
 use tracing::Subscriber;
 use tracing_bunyan_formatter::{BunyanFormattingLayer, JsonStorageLayer};
@@ -43,5 +43,5 @@ where
     R: Send + 'static,
 {
     let current_span = tracing::Span::current();
-    actix_web::rt::task::spawn_blocking(move || current_span.in_scope(f))
+    tokio::task::spawn_blocking(move || current_span.in_scope(f))
 }
