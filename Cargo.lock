@@ -21,9 +21,9 @@ dependencies = [
 
 [[package]]
 name = "actix-http"
-version = "3.0.0-beta.17"
+version = "3.0.0-beta.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dac76407e2be239b5e544c9d83bdac4a0d68ae188031ac0424aa3e4868a669be"
+checksum = "05b95871724d27ac9a23d6db3246b23e4e42cd44a23145e1c6b04b78fb5271da"
 dependencies = [
  "actix-codec",
  "actix-rt",
@@ -152,9 +152,9 @@ dependencies = [
 
 [[package]]
 name = "actix-web"
-version = "4.0.0-beta.18"
+version = "4.0.0-beta.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a542a92e385844d988b34f1af289dbb0ca927c23740076a56fdf770b1af69fbc"
+checksum = "229d0d2c11d6c734327cf1fbc15dd644b351b440bcb4608349258f5e00605bdc"
 dependencies = [
  "actix-codec",
  "actix-http",
@@ -1161,12 +1161,6 @@ checksum = "ddca131f3e7f2ce2df364b57949a9d47915cfbd35e46cfee355ccebbf794d6a2"
 dependencies = [
  "digest 0.10.1",
 ]
-
-[[package]]
-name = "htmlescape"
-version = "0.3.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9025058dae765dee5070ec375f591e2ba14638c63feff74f13805a72e523163"
 
 [[package]]
 name = "http"
@@ -2768,9 +2762,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-actix-web"
-version = "0.5.0-beta.8"
+version = "0.5.0-beta.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "da8e6a7393e9b680de78d876f8c1432aebf56f3e70346a4a821160c04677a272"
+checksum = "6025a1b13fe88f5a520e0b9caeb962f969093e3f05f567ca3cd02f9391733c01"
 dependencies = [
  "actix-web",
  "pin-project",
@@ -2928,12 +2922,6 @@ dependencies = [
  "percent-encoding",
  "serde",
 ]
-
-[[package]]
-name = "urlencoding"
-version = "2.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
 
 [[package]]
 name = "uuid"
@@ -3209,7 +3197,6 @@ dependencies = [
  "claim",
  "config 0.11.0",
  "fake",
- "htmlescape",
  "linkify",
  "once_cell",
  "quickcheck",
@@ -3229,7 +3216,6 @@ dependencies = [
  "tracing-log",
  "tracing-subscriber",
  "unicode-segmentation",
- "urlencoding",
  "uuid",
  "validator",
  "wiremock",
