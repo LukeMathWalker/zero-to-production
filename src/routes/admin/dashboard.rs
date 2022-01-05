@@ -34,7 +34,7 @@ pub async fn admin_dashboard(
         <li>
             <a href="javascript:document.logoutForm.submit()">Logout</a>
             <form name="logoutForm" action="/admin/logout" method="post" hidden>
-                <input hidden type="submit" value="Logout" />
+                <input hidden type="submit" value="Logout">
             </form>
         </li>
     </ol>

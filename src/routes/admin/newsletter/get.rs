@@ -30,15 +30,15 @@ pub async fn publish_newsletter_form(
 <body>
     {}
     <form action="/admin/newsletters" method="post">
-        <label>Title:<br />
+        <label>Title:<br>
             <input
                 type="text"
                 placeholder="Enter the issue title"
                 name="title"
-            />
+            >
         </label>
-        <br />
-        <label>Plain text content:<br />
+        <br>
+        <label>Plain text content:<br>
             <textarea
                 placeholder="Enter the content in plain text"
                 name="text_content"
@@ -46,8 +46,8 @@ pub async fn publish_newsletter_form(
                 cols="50"
             ></textarea>
         </label>
-        <br />
-        <label>HTML content:<br />
+        <br>
+        <label>HTML content:<br>
             <textarea
                 placeholder="Enter the content in HTML format"
                 name="html_content"
@@ -55,7 +55,7 @@ pub async fn publish_newsletter_form(
                 cols="50"
             ></textarea>
         </label>
-        <br />
+        <br>
         <button type="submit">Publish</button>
     </form>
     <p><a href="/admin/dashboard">&lt;- Back</a></p>
