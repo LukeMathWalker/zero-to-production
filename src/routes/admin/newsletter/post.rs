@@ -1,7 +1,8 @@
+use crate::authentication::UserId;
 use crate::domain::SubscriberEmail;
 use crate::email_client::EmailClient;
-use crate::session_state::TypedSession;
 use crate::utils::{e500, see_other};
+use actix_web::web::ReqData;
 use actix_web::{web, HttpResponse};
 use actix_web_flash_messages::FlashMessage;
 use anyhow::Context;
@@ -16,20 +17,15 @@ pub struct FormData {
 
 #[tracing::instrument(
     name = "Publish a newsletter issue",
-    skip(form, session, pool, email_client),
-    fields(user_id=tracing::field::Empty)
+    skip(form, pool, email_client, user_id),
+    fields(user_id=%*user_id)
 )]
 pub async fn publish_newsletter(
     form: web::Form<FormData>,
-    session: TypedSession,
+    user_id: ReqData<UserId>,
     pool: web::Data<PgPool>,
     email_client: web::Data<EmailClient>,
 ) -> Result<HttpResponse, actix_web::Error> {
-    let user_id = session.get_user_id().map_err(e500)?;
-    if user_id.is_none() {
-        return Ok(see_other("/login"));
-    };
-    tracing::Span::current().record("user_id", &tracing::field::display(&user_id.unwrap()));
     let subscribers = get_confirmed_subscribers(&pool).await.map_err(e500)?;
     for subscriber in subscribers {
         match subscriber {
