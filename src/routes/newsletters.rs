@@ -75,7 +75,7 @@ struct ConfirmedSubscriber {
     email: SubscriberEmail,
 }
 
-#[tracing::instrument(name = "Adding a new subscriber", skip(pool))]
+#[tracing::instrument(name = "Get confirmed subscribers", skip(pool))]
 async fn get_confirmed_subscribers(
     pool: &PgPool,
 ) -> Result<Vec<Result<ConfirmedSubscriber, anyhow::Error>>, anyhow::Error> {
