@@ -1,6 +1,7 @@
 application:
   port: 8000
   host: 0.0.0.0
+  hmac_secret: "super-long-and-secret-random-key-needed-to-verify-message-integrity"
 database:
   host: "127.0.0.1"
   port: 5432

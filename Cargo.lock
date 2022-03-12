@@ -946,6 +946,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "hmac"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
+dependencies = [
+ "digest 0.10.3",
+]
+
+[[package]]
+name = "htmlescape"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e9025058dae765dee5070ec375f591e2ba14638c63feff74f13805a72e523163"
+
+[[package]]
 name = "http"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1870,6 +1885,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sha2"
+version = "0.10.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "55deaec60f81eefe3cce0dc50bda92d6d8e88f2a27df7c5033b42afeb1ed2676"
+dependencies = [
+ "cfg-if",
+ "cpufeatures",
+ "digest 0.10.3",
+]
+
+[[package]]
 name = "sharded-slab"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1959,7 +1985,7 @@ dependencies = [
  "futures-util",
  "hashlink",
  "hex",
- "hmac",
+ "hmac 0.11.0",
  "indexmap",
  "itoa",
  "libc",
@@ -1974,7 +2000,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha-1 0.9.8",
- "sha2",
+ "sha2 0.9.9",
  "smallvec",
  "sqlformat",
  "sqlx-rt",
@@ -2003,7 +2029,7 @@ dependencies = [
  "quote",
  "serde",
  "serde_json",
- "sha2",
+ "sha2 0.9.9",
  "sqlx-core",
  "sqlx-rt",
  "syn",
@@ -2394,6 +2420,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "urlencoding"
+version = "2.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "68b90931029ab9b034b300b797048cf23723400aa757e8a2bfb9d748102f9821"
+
+[[package]]
 name = "uuid"
 version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2708,6 +2740,9 @@ dependencies = [
  "claim",
  "config",
  "fake",
+ "hex",
+ "hmac 0.12.1",
+ "htmlescape",
  "linkify",
  "log",
  "once_cell",
@@ -2719,6 +2754,7 @@ dependencies = [
  "serde",
  "serde-aux",
  "serde_json",
+ "sha2 0.10.2",
  "sqlx",
  "thiserror",
  "tokio",
@@ -2728,6 +2764,7 @@ dependencies = [
  "tracing-log",
  "tracing-subscriber",
  "unicode-segmentation",
+ "urlencoding",
  "uuid",
  "validator",
  "wiremock",
