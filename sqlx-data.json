@@ -1,19 +1,5 @@
 {
   "db": "PostgreSQL",
-  "0029b925e31429d25d23538804511943e2ea1fddc5a2db9a4e219c9b5be53fce": {
-    "query": "INSERT INTO users (user_id, username, password_hash)\n            VALUES ($1, $2, $3)",
-    "describe": {
-      "columns": [],
-      "parameters": {
-        "Left": [
-          "Uuid",
-          "Text",
-          "Text"
-        ]
-      },
-      "nullable": []
-    }
-  },
   "06f83a51e9d2ca842dc0d6947ad39d9be966636700de58d404d8e1471a260c9a": {
     "query": "\n        SELECT newsletter_issue_id, subscriber_email\n        FROM issue_delivery_queue\n        FOR UPDATE\n        SKIP LOCKED\n        LIMIT 1\n        ",
     "describe": {
@@ -198,36 +184,6 @@
       "nullable": []
     }
   },
-  "9ab6536d2bf619381573b3bf13507d53b2e9cf50051e51c803e916f25b51abd2": {
-    "query": "SELECT email, name, status FROM subscriptions",
-    "describe": {
-      "columns": [
-        {
-          "ordinal": 0,
-          "name": "email",
-          "type_info": "Text"
-        },
-        {
-          "ordinal": 1,
-          "name": "name",
-          "type_info": "Text"
-        },
-        {
-          "ordinal": 2,
-          "name": "status",
-          "type_info": "Text"
-        }
-      ],
-      "parameters": {
-        "Left": []
-      },
-      "nullable": [
-        false,
-        false,
-        false
-      ]
-    }
-  },
   "9f103f7d6dfa569bafce4546e6e610f3d31b95fe81f96ea72575b27ddfea796e": {
     "query": "\n        SELECT \n            response_status_code as \"response_status_code!\", \n            response_headers as \"response_headers!: Vec<HeaderPairRecord>\",\n            response_body as \"response_body!\"\n        FROM idempotency\n        WHERE \n          user_id = $1 AND\n          idempotency_key = $2\n        ",
     "describe": {
@@ -304,16 +260,6 @@
         "Left": [
           "Uuid"
         ]
-      },
-      "nullable": []
-    }
-  },
-  "aa6ec2d18c8536eb8340bdf02a833440ff7954c503133ed99ebd6190822edf04": {
-    "query": "ALTER TABLE subscriptions DROP COLUMN email;",
-    "describe": {
-      "columns": [],
-      "parameters": {
-        "Left": []
       },
       "nullable": []
     }
