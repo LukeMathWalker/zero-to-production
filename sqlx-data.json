@@ -1,19 +1,5 @@
 {
   "db": "PostgreSQL",
-  "0029b925e31429d25d23538804511943e2ea1fddc5a2db9a4e219c9b5be53fce": {
-    "query": "INSERT INTO users (user_id, username, password_hash)\n            VALUES ($1, $2, $3)",
-    "describe": {
-      "columns": [],
-      "parameters": {
-        "Left": [
-          "Uuid",
-          "Text",
-          "Text"
-        ]
-      },
-      "nullable": []
-    }
-  },
   "51c9c995452d3359e3da7e2f2ff8a6e68690f740a36d2a32ec7c40b08931ebdb": {
     "query": "\n    INSERT INTO subscriptions (id, email, name, subscribed_at, status)\n    VALUES ($1, $2, $3, $4, 'pending_confirmation')\n            ",
     "describe": {
@@ -60,36 +46,6 @@
       ]
     }
   },
-  "9ab6536d2bf619381573b3bf13507d53b2e9cf50051e51c803e916f25b51abd2": {
-    "query": "SELECT email, name, status FROM subscriptions",
-    "describe": {
-      "columns": [
-        {
-          "ordinal": 0,
-          "name": "email",
-          "type_info": "Text"
-        },
-        {
-          "ordinal": 1,
-          "name": "name",
-          "type_info": "Text"
-        },
-        {
-          "ordinal": 2,
-          "name": "status",
-          "type_info": "Text"
-        }
-      ],
-      "parameters": {
-        "Left": []
-      },
-      "nullable": [
-        false,
-        false,
-        false
-      ]
-    }
-  },
   "a71a1932b894572106460ca2e34a63dc0cb8c1ba7a70547add1cddbb68133c2b": {
     "query": "UPDATE subscriptions SET status = 'confirmed' WHERE id = $1",
     "describe": {
@@ -98,16 +54,6 @@
         "Left": [
           "Uuid"
         ]
-      },
-      "nullable": []
-    }
-  },
-  "aa6ec2d18c8536eb8340bdf02a833440ff7954c503133ed99ebd6190822edf04": {
-    "query": "ALTER TABLE subscriptions DROP COLUMN email;",
-    "describe": {
-      "columns": [],
-      "parameters": {
-        "Left": []
       },
       "nullable": []
     }
