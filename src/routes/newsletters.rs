@@ -6,7 +6,7 @@ use actix_web::http::{
     header::{HeaderMap, HeaderValue},
     StatusCode,
 };
-use actix_web::{web, HttpResponse, HttpRequest, ResponseError};
+use actix_web::{web, HttpRequest, HttpResponse, ResponseError};
 use anyhow::Context;
 use argon2::{Argon2, PasswordHash, PasswordVerifier};
 use secrecy::{ExposeSecret, Secret};
