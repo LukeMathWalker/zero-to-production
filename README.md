@@ -1,35 +1,66 @@
-# Zero To Production / Code
+# Zero To Production In Rust
 
 <div align="center"><a href="https://zero2prod.com" target="_blank"><img src="https://www.zero2prod.com/assets/img/zero2prod_banner.webp" /></a></div>
 
 [Zero To Production In Rust](https://zero2prod.com) is an opinionated introduction to backend development using Rust.
 
-This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts snapshots of the codebase of our email newsletter project at end of each chapter.
+This repository serves as supplementary material for [the book](https://zero2prod.com/): it hosts several snapshots of the codebase for our email newsletter project as it evolves throughout the book.
 
 ## Chapter snapshots
 
-The `master` branch (where you are right now!) shows the project at the end of the last published chapter _(Chapter 8, right now)_.
+The [`main`](https://github.com/LukeMathWalker/zero-to-production) branch shows the project at the end of the book.
 
 You can browse the project at the end of previous chapters by switching to their dedicated branches:
 
 - [Chapter 3, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part0)
 - [Chapter 3, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-03-part1)
 - [Chapter 4](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-04)
-- [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter05)
-- [Chapter 6, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06)
+- [Chapter 5](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-05)
+- [Chapter 6, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06-part0)
 - [Chapter 6, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-06-part1)
 - [Chapter 7, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part0)
 - [Chapter 7, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part1)
 - [Chapter 7, Part 2](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-07-part2)
-- [Chapter 8](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-08-part0)
+- [Chapter 8](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-08)
 - [Chapter 9](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-09)
+- [Chapter 10, Part 0](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part0)
+- [Chapter 10, Part 1](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part1)
+- [Chapter 10, Part 2](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part2)
+- [Chapter 10, Part 3](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-10-part3)
+- [Chapter 11](https://github.com/LukeMathWalker/zero-to-production/tree/root-chapter-11)
 
-## Pre-requisite
+## Pre-requisites
 
 You'll need to install:
 
 - [Rust](https://www.rust-lang.org/tools/install)
 - [Docker](https://docs.docker.com/get-docker/)
+
+There are also some OS-specific requirements.
+
+### Windows
+  
+```bash
+cargo install -f cargo-binutils
+rustup component add llvm-tools-preview
+```
+
+### Linux
+
+```bash
+# Ubuntu 
+sudo apt-get install lld clang
+# Arch 
+sudo pacman -S lld clang
+```
+
+### MacOS
+
+```bash
+brew install michaeleisel/zld/zld
+```
+
+## How to build
 
 Launch a (migrated) Postgres database via Docker:
 
@@ -37,9 +68,13 @@ Launch a (migrated) Postgres database via Docker:
 ./scripts/init_db.sh
 ```
 
-## How to build
+Launch a Redis instance via Docker:
 
-Using `cargo`:
+```bash
+./scripts/init_redis.sh
+```
+
+Launch `cargo`:
 
 ```bash
 cargo build
@@ -47,23 +82,20 @@ cargo build
 
 ## How to test
 
-Using `cargo`:
+Launch a (migrated) Postgres database via Docker:
+
+```bash
+./scripts/init_db.sh
+```
+
+Launch a Redis instance via Docker:
+
+```bash
+./scripts/init_redis.sh
+```
+
+Launch `cargo`:
 
 ```bash
 cargo test 
 ```
-
-## License
-
-<sup>
-Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
-2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
-</sup>
-
-<br>
-
-<sub>
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
-</sub>
