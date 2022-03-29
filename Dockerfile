@@ -15,7 +15,7 @@ RUN rm ./src/*.rs ./target/release/deps/zero2prod* ./target/release/deps/libzero
 COPY ./src ./src
 
 ENV SQLX_OFFLINE true
-
+# Build our project
 RUN cargo build --release --bin zero2prod
 
 FROM docker.io/debian:bullseye-slim AS runtime
@@ -23,7 +23,7 @@ FROM docker.io/debian:bullseye-slim AS runtime
 WORKDIR /app
 
 RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends openssl \
+    && apt-get install -y --no-install-recommends openssl ca-certificates \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
