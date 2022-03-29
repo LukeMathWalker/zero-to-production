@@ -1,25 +1,29 @@
-FROM lukemathwalker/cargo-chef:latest-rust-1.59.0 as chef
-WORKDIR /app
-RUN apt update && apt install lld clang -y
+FROM docker.io/library/rust:1.59-slim-bullseye as builder
 
-FROM chef as planner
-COPY . .
-# Compute a lock-like file for our project
-RUN cargo chef prepare  --recipe-path recipe.json
+RUN USER=root cargo new --bin zero-to-production
 
-FROM chef as builder
-COPY --from=planner /app/recipe.json recipe.json
-# Build our project dependencies, not our application!
-RUN cargo chef cook --release --recipe-path recipe.json
-COPY . .
+WORKDIR /zero-to-production
+
+RUN touch ./src/lib.rs
+
+COPY ./Cargo.toml ./Cargo.lock ./
+
+RUN cargo build --release
+
+RUN rm ./src/*.rs ./target/release/deps/zero2prod* ./target/release/deps/libzero2prod* ./target/release/libzero2prod* ./target/release/zero2prod*
+
+COPY ./src ./src
+
 ENV SQLX_OFFLINE true
-# Build our project
+
 RUN cargo build --release --bin zero2prod
 
-FROM debian:bullseye-slim AS runtime
+FROM docker.io/debian:bullseye-slim AS runtime
+
 WORKDIR /app
+
 RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends openssl ca-certificates \
+    && apt-get install -y --no-install-recommends openssl \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
