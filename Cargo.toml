@@ -27,7 +27,7 @@ tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
 tracing-bunyan-formatter = "0.3"
 tracing-log = "0.1.1"
 thiserror = "1.0.24"
-serde-aux = "3"
+serde-aux = { version = "3", default-features = false, features = [] }
 unicode-segmentation = "1.7.1"
 validator = "0.14.0"
 rand = { version = "0.8", features=["std_rng"] }
