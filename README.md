@@ -49,9 +49,13 @@ rustup component add llvm-tools-preview
 
 ```bash
 # Ubuntu 
-sudo apt-get install lld clang
+sudo apt-get install lld clang libssl-dev postgresql-client
 # Arch 
-sudo pacman -S lld clang
+sudo pacman -S lld clang postgresql
+```
+
+```
+cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
 ```
 
 ### MacOS
