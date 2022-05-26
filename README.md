@@ -45,6 +45,10 @@ cargo install -f cargo-binutils
 rustup component add llvm-tools-preview
 ```
 
+```
+cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
+```
+
 ### Linux
 
 ```bash
@@ -62,6 +66,10 @@ cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
 
 ```bash
 brew install michaeleisel/zld/zld
+```
+
+```
+cargo install --version=0.5.7 sqlx-cli --no-default-features --features postgres
 ```
 
 ## How to build
