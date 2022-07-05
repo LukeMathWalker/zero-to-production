@@ -4,7 +4,7 @@ use fake::faker::name::en::Name;
 use fake::Fake;
 use std::time::Duration;
 use wiremock::matchers::{any, method, path};
-use wiremock::{Mock, MockBuilder, ResponseTemplate};
+use wiremock::{Mock, ResponseTemplate};
 
 async fn create_unconfirmed_subscriber(app: &TestApp) -> ConfirmationLinks {
     // We are working with multiple subscribers now,
