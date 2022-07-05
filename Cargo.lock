@@ -1692,7 +1692,7 @@ dependencies = [
  "thiserror",
  "tokio-stream",
  "url",
- "uuid 1.1.2",
+ "uuid",
  "webpki-roots",
  "whoami",
 ]
@@ -1940,15 +1940,15 @@ dependencies = [
 
 [[package]]
 name = "tracing-actix-web"
-version = "0.5.1"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "99bcebac55fba44eadf75a424ee403e756f9165596a613d125876388e5fb4c34"
+checksum = "f0b2cd6e5074ff67679a0ff68bc6333be78d29910ba7cd295d948aa5ff152032"
 dependencies = [
  "actix-web",
  "pin-project",
  "tracing",
  "tracing-futures",
- "uuid 0.8.2",
+ "uuid",
 ]
 
 [[package]]
@@ -2089,15 +2089,6 @@ dependencies = [
  "idna",
  "matches",
  "percent-encoding",
-]
-
-[[package]]
-name = "uuid"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc5cf98d8186244414c848017f0e2676b3fcb46807f6668a97dfe67359a3c4b7"
-dependencies = [
- "getrandom",
 ]
 
 [[package]]
@@ -2355,7 +2346,7 @@ dependencies = [
  "tracing-bunyan-formatter",
  "tracing-log",
  "tracing-subscriber",
- "uuid 1.1.2",
+ "uuid",
 ]
 
 [[package]]
