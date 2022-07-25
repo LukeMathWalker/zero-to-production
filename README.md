@@ -69,7 +69,7 @@ brew install michaeleisel/zld/zld
 ```
 
 ```
-cargo install --version=0.6.0 sqlx-cli --no-default-features --features postgres
+cargo install --version=0.6.0 sqlx-cli --no-default-features --features native-tls,postgres
 ```
 
 ## How to build
