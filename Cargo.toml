@@ -19,7 +19,7 @@ serde = "1.0.115"
 config = { version = "0.13", default-features = false, features = ["yaml"] }
 sqlx = { version = "0.6", default-features = false, features = ["runtime-actix-rustls", "macros", "postgres", "uuid", "chrono", "migrate", "offline"] }
 uuid = { version = "1", features = ["v4"] }
-chrono = "0.4.15"
+chrono = { version = "0.4.22", default-features = false, features = ["clock"] }
 tracing = "0.1.19"
 tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
 tracing-bunyan-formatter = "0.3.1"
