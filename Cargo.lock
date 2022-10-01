@@ -157,7 +157,7 @@ dependencies = [
  "redis",
  "serde",
  "serde_json",
- "time 0.3.14",
+ "time",
  "tracing",
 ]
 
@@ -208,7 +208,7 @@ dependencies = [
  "serde_urlencoded",
  "smallvec",
  "socket2",
- "time 0.3.14",
+ "time",
  "url",
 ]
 
@@ -236,7 +236,7 @@ dependencies = [
  "serde",
  "serde_json",
  "thiserror",
- "time 0.3.14",
+ "time",
  "tokio",
 ]
 
@@ -584,11 +584,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bfd4d1b31faaa3a89d7934dbded3111da0d2ef28e3ebccdb4f0179f5929d1ef1"
 dependencies = [
  "iana-time-zone",
- "js-sys",
  "num-integer",
  "num-traits",
- "time 0.1.44",
- "wasm-bindgen",
  "winapi",
 ]
 
@@ -668,7 +665,7 @@ dependencies = [
  "rand 0.8.5",
  "sha2",
  "subtle",
- "time 0.3.14",
+ "time",
  "version_check",
 ]
 
@@ -684,7 +681,7 @@ dependencies = [
  "publicsuffix",
  "serde",
  "serde_json",
- "time 0.3.14",
+ "time",
  "url",
 ]
 
@@ -2535,17 +2532,6 @@ dependencies = [
 
 [[package]]
 name = "time"
-version = "0.1.44"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6db9e6914ab8b1ae1c260a4ae7a49b6c5611b40328a735b21862567685e73255"
-dependencies = [
- "libc",
- "wasi 0.10.0+wasi-snapshot-preview1",
- "winapi",
-]
-
-[[package]]
-name = "time"
 version = "0.3.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3c3f9a28b618c3a6b9251b6908e9c99e04b9e5c02e6581ccbb67d59c34ef7f9b"
@@ -2706,7 +2692,7 @@ dependencies = [
  "log",
  "serde",
  "serde_json",
- "time 0.3.14",
+ "time",
  "tracing",
  "tracing-core",
  "tracing-log",
@@ -2898,12 +2884,6 @@ name = "wasi"
 version = "0.9.0+wasi-snapshot-preview1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cccddf32554fecc6acb585f82a32a72e28b48f8c4c1883ddfeeeaa96f7d8e519"
-
-[[package]]
-name = "wasi"
-version = "0.10.0+wasi-snapshot-preview1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1a143597ca7c7793eff794def352d41792a93c481eb1042423ff7ff72ba2c31f"
 
 [[package]]
 name = "wasi"
