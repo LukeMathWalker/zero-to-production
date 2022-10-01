@@ -30,7 +30,7 @@ jobs:
           - 5432:5432
     env:
       SQLX_VERSION: 0.6.2
-      SQLX_FEATURES: postgres
+      SQLX_FEATURES: "rustls,postgres"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -56,7 +56,7 @@ jobs:
         with:
           path: |
             ~/.cargo/bin/sqlx
-          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}-${{ env.SQLX_FEATURES }}
+          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}
 
       - name: Install sqlx-cli 
         uses: actions-rs/cargo@v1
@@ -67,7 +67,7 @@ jobs:
             sqlx-cli
             --force
             --version=${{ env.SQLX_VERSION }}
-            --features=${{ env.SQLX_FEATURES }}
+            --features ${{ env.SQLX_FEATURES }}
             --no-default-features
             --locked
 
@@ -110,7 +110,7 @@ jobs:
           - 5432:5432
     env:
       SQLX_VERSION: 0.6.2
-      SQLX_FEATURES: postgres
+      SQLX_FEATURES: "rustls,postgres"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -128,7 +128,7 @@ jobs:
         with:
           path: |
             ~/.cargo/bin/sqlx
-          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}-${{ env.SQLX_FEATURES }}
+          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}
 
       - name: Install sqlx-cli 
         uses: actions-rs/cargo@v1
@@ -139,7 +139,7 @@ jobs:
             sqlx-cli
             --force
             --version=${{ env.SQLX_VERSION }}
-            --features=${{ env.SQLX_FEATURES }}
+            --features ${{ env.SQLX_FEATURES }}
             --no-default-features
             --locked
 
@@ -168,7 +168,7 @@ jobs:
           - 5432:5432
     env:
       SQLX_VERSION: 0.6.2
-      SQLX_FEATURES: postgres
+      SQLX_FEATURES: "rustls,postgres"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -185,7 +185,7 @@ jobs:
         with:
           path: |
             ~/.cargo/bin/sqlx
-          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}-${{ env.SQLX_FEATURES }}
+          key: ${{ runner.os }}-sqlx-${{ env.SQLX_VERSION }}
 
       - name: Install sqlx-cli 
         uses: actions-rs/cargo@v1
@@ -196,7 +196,7 @@ jobs:
             sqlx-cli
             --force
             --version=${{ env.SQLX_VERSION }}
-            --features=${{ env.SQLX_FEATURES }}
+            --features ${{ env.SQLX_FEATURES }}
             --no-default-features
             --locked
 
