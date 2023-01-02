@@ -41,12 +41,12 @@ There are also some OS-specific requirements.
 ### Windows
   
 ```bash
-cargo install -f cargo-binutils
+cargo binstall -f cargo-binutils
 rustup component add llvm-tools-preview
 ```
 
 ```
-cargo install --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
+cargo binstall --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
 ```
 
 ### Linux
@@ -59,7 +59,7 @@ sudo pacman -S lld clang postgresql
 ```
 
 ```
-cargo install --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
+cargo binstall --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
 ```
 
 ### MacOS
@@ -69,7 +69,7 @@ brew install michaeleisel/zld/zld
 ```
 
 ```
-cargo install --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
+cargo binstall --version="~0.6" sqlx-cli --no-default-features --features rustls,postgres
 ```
 
 ## How to build
