@@ -1626,9 +1626,9 @@ dependencies = [
 
 [[package]]
 name = "serde-aux"
-version = "3.1.0"
+version = "4.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d0a77223b653fa95f3f9864f3eb25b93e4ed170687eb42d85b6b98af21d5e1de"
+checksum = "c599b3fd89a75e0c18d6d2be693ddb12cccaf771db4ff9e39097104808a014c0"
 dependencies = [
  "chrono",
  "serde",
@@ -2069,9 +2069,9 @@ dependencies = [
 
 [[package]]
 name = "tracing-actix-web"
-version = "0.6.2"
+version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d725b8fa6ef307b3f4856913523337de45c47cc79271bafd7acfb39559e3a2da"
+checksum = "4082e4d81173e0b7ad3cfb71e9eaef0dd0cbb7b139fdb56394f488a3b0760b23"
 dependencies = [
  "actix-web",
  "pin-project",
