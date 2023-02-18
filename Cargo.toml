@@ -33,7 +33,7 @@ secrecy = { version = "0.8", features = ["serde"] }
 
 [dev-dependencies]
 reqwest = { version = "0.11", features = ["json"] }
-claim = "0.5.0"
+claims = "0.7.0"
 quickcheck = "0.9.2"
 quickcheck_macros = "0.9.1"
 fake = "~2.3.0"
