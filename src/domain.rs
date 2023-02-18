@@ -49,7 +49,7 @@ impl AsRef<str> for SubscriberName {
 #[cfg(test)]
 mod tests {
     use crate::domain::SubscriberName;
-    use claim::{assert_err, assert_ok};
+    use claims::{assert_err, assert_ok};
 
     #[test]
     fn a_256_grapheme_long_name_is_valid() {
