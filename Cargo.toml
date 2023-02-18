@@ -26,10 +26,10 @@ tracing = "0.1.19"
 tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
 tracing-bunyan-formatter = "0.3.1"
 tracing-log = "0.1.1"
-serde-aux = "3"
+serde-aux = "4"
 unicode-segmentation = "1.7.1"
-validator = "0.15.0"
-tracing-actix-web = "0.6"
+validator = "0.16"
+tracing-actix-web = "0.7"
 secrecy = { version = "0.8", features = ["serde"] }
 
 [dev-dependencies]
