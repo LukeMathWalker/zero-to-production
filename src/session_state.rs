@@ -1,4 +1,4 @@
-use actix_session::Session;
+use actix_session::{Session, SessionGetError, SessionInsertError};
 use actix_session::SessionExt;
 use actix_web::dev::Payload;
 use actix_web::{FromRequest, HttpRequest};
@@ -14,11 +14,11 @@ impl TypedSession {
         self.0.renew();
     }
 
-    pub fn insert_user_id(&self, user_id: Uuid) -> Result<(), serde_json::Error> {
+    pub fn insert_user_id(&self, user_id: Uuid) -> Result<(), SessionInsertError> {
         self.0.insert(Self::USER_ID_KEY, user_id)
     }
 
-    pub fn get_user_id(&self) -> Result<Option<Uuid>, serde_json::Error> {
+    pub fn get_user_id(&self) -> Result<Option<Uuid>, SessionGetError> {
         self.0.get(Self::USER_ID_KEY)
     }
 
