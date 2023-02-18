@@ -33,7 +33,7 @@ tracing-actix-web = "0.6"
 secrecy = { version = "0.8", features = ["serde"] }
 
 [dev-dependencies]
-claim = "0.5.0"
+claims = "0.7.0"
 quickcheck = "0.9.2"
 quickcheck_macros = "0.9.1"
 fake = "~2.3.0"
