@@ -58,7 +58,7 @@ pub fn basic_authentication(headers: &HeaderMap) -> Result<Credentials, anyhow::
 
 #[derive(thiserror::Error)]
 pub enum PublishError {
-    #[error("Authentication failed.")]
+    #[error("Authentication failed")]
     AuthError(#[source] anyhow::Error),
     #[error(transparent)]
     UnexpectedError(#[from] anyhow::Error),
