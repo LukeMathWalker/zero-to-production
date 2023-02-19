@@ -27,7 +27,7 @@ pub struct Content {
 
 #[derive(thiserror::Error)]
 pub enum PublishError {
-    #[error("Authentication failed.")]
+    #[error("Authentication failed")]
     AuthError(#[source] anyhow::Error),
     #[error(transparent)]
     UnexpectedError(#[from] anyhow::Error),
