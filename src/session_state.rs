@@ -1,5 +1,5 @@
-use actix_session::{Session, SessionGetError, SessionInsertError};
 use actix_session::SessionExt;
+use actix_session::{Session, SessionGetError, SessionInsertError};
 use actix_web::dev::Payload;
 use actix_web::{FromRequest, HttpRequest};
 use std::future::{ready, Ready};
