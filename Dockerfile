@@ -1,4 +1,5 @@
-FROM lukemathwalker/cargo-chef:latest-rust-1.59.0 as chef
+# Keep this version of Rust with the one being used to compile the project
+FROM lukemathwalker/cargo-chef:latest-rust-1.68.0 as chef
 WORKDIR /app
 RUN apt update && apt install lld clang -y
 
