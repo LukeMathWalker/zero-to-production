@@ -3,7 +3,7 @@ use actix_web::body::to_bytes;
 use actix_web::http::StatusCode;
 use actix_web::HttpResponse;
 use sqlx::postgres::PgHasArrayType;
-use sqlx::PgPool;
+use sqlx::{Executor, PgPool};
 use sqlx::{Postgres, Transaction};
 use uuid::Uuid;
 
@@ -71,8 +71,9 @@ pub async fn save_response(
         }
         h
     };
-    sqlx::query_unchecked!(
-        r#"
+    transaction
+        .execute(sqlx::query_unchecked!(
+            r#"
         UPDATE idempotency
         SET 
             response_status_code = $3, 
@@ -82,14 +83,13 @@ pub async fn save_response(
             user_id = $1 AND
             idempotency_key = $2
         "#,
-        user_id,
-        idempotency_key.as_ref(),
-        status_code,
-        headers,
-        body.as_ref()
-    )
-    .execute(&mut transaction)
-    .await?;
+            user_id,
+            idempotency_key.as_ref(),
+            status_code,
+            headers,
+            body.as_ref()
+        ))
+        .await?;
     transaction.commit().await?;
 
     let http_response = response_head.set_body(body).map_into_boxed_body();
@@ -109,7 +109,7 @@ pub async fn try_processing(
     user_id: Uuid,
 ) -> Result<NextAction, anyhow::Error> {
     let mut transaction = pool.begin().await?;
-    let n_inserted_rows = sqlx::query!(
+    let query = sqlx::query!(
         r#"
         INSERT INTO idempotency (
             user_id, 
@@ -121,10 +121,8 @@ pub async fn try_processing(
         "#,
         user_id,
         idempotency_key.as_ref()
-    )
-    .execute(&mut transaction)
-    .await?
-    .rows_affected();
+    );
+    let n_inserted_rows = transaction.execute(query).await?.rows_affected();
     if n_inserted_rows > 0 {
         Ok(NextAction::StartProcessing(transaction))
     } else {
