@@ -56,6 +56,8 @@ cargo install --version="~0.7" sqlx-cli --no-default-features --features rustls,
 sudo apt-get install lld clang libssl-dev postgresql-client
 # Arch 
 sudo pacman -S lld clang postgresql
+# Fedora
+sudo dnf -y install openssl-libs postgresql lld clang
 ```
 
 ```
