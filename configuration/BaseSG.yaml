@@ -1,0 +1,29 @@
+# Configuración de la aplicación
+application:
+  port: 8000
+  host: 0.0.0.0
+  hmac_secret: "${APPLICATION_HMAC_SECRET}"  # Usar variable de entorno
+
+# Configuración de la base de datos
+database:
+  host: "127.0.0.1"
+  port: 5432
+  username: "postgres"
+  password: "${DATABASE_PASSWORD}"  # Usar variable de entorno
+  database_name: "newsletter"
+  require_ssl: false
+
+# Configuración del cliente de correo electrónico
+email_client:
+  base_url: "localhost"
+  sender_email: "test@gmail.com"
+  authorization_token: "${EMAIL_AUTH_TOKEN}"  # Usar variable de entorno
+  timeout_milliseconds: 10000
+
+# Configuración de Redis
+redis_uri: "redis://127.0.0.1:6379"
+
+# Variables de entorno recomendadas:
+# - APPLICATION_HMAC_SECRET: Super-long-and-secret-random-key-needed-to-verify-message-integrity
+# - DATABASE_PASSWORD: password
+# - EMAIL_AUTH_TOKEN: my-secret-token
