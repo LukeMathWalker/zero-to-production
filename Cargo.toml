@@ -33,7 +33,7 @@ rand = { version = "0.8", features=["std_rng"] }
 anyhow = "1.0.40"
 base64 = "0.21.0"
 argon2 = { version = "0.4", features = ["std"] }
-validator = "0.16"
+validator = "0.17"
 tracing-actix-web = "0.7"
 secrecy = { version = "0.8", features = ["serde"] }
 actix-web-flash-messages = { version = "0.4", features = ["cookies"] }
