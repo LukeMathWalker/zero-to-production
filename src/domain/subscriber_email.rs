@@ -1,15 +1,22 @@
-use validator::validate_email;
+use validator::ValidateEmail;
 
 #[derive(Debug)]
 pub struct SubscriberEmail(String);
 
 impl SubscriberEmail {
     pub fn parse(s: String) -> Result<SubscriberEmail, String> {
-        if validate_email(&s) {
-            Ok(Self(s))
+        let email = Self(s.clone());
+        if email.validate_email() {
+            Ok(email)
         } else {
             Err(format!("{} is not a valid subscriber email.", s))
         }
+    }
+}
+
+impl ValidateEmail for SubscriberEmail {
+    fn as_email_string(&self) -> Option<std::borrow::Cow<str>> {
+        Some(self.0.as_str().into())
     }
 }
 
