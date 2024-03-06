@@ -58,11 +58,24 @@ pub async fn validate_credentials(
         expected_password_hash = stored_password_hash;
     }
 
-    spawn_blocking_with_tracing(move || {
+    match spawn_blocking_with_tracing(move || {
         verify_password_hash(expected_password_hash, credentials.password)
     })
     .await
-    .context("Failed to spawn blocking task.")??;
+    .context("Failed to spawn blocking task.")?
+    {
+        Ok(_) => Ok(()),
+        Err(e) => match e {
+            AuthError::InvalidCredentials(_) => {
+                if user_id.is_none() {
+                    Ok(())
+                } else {
+                    Err(e)
+                }
+            }
+            _ => Err(e),
+        },
+    }?;
 
     user_id
         .ok_or_else(|| anyhow::anyhow!("Unknown username."))
