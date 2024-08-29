@@ -10,7 +10,7 @@
         "Int2",
         {
           "Custom": {
-            "name": "_header_pair",
+            "name": "header_pair[]",
             "kind": {
               "Array": {
                 "Custom": {
