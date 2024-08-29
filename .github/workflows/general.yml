@@ -8,13 +8,13 @@ on:
     branches:
       - main
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
     branches:
       - main
 
 env:
   CARGO_TERM_COLOR: always
-  SQLX_VERSION: 0.7.1
+  SQLX_VERSION: 0.8.0
   SQLX_FEATURES: "rustls,postgres"
 
 jobs:
@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       postgres:
+        # Docker Hub image
         image: postgres:14
         env:
           POSTGRES_USER: postgres
@@ -35,18 +36,34 @@ jobs:
         ports:
           - 6379:6379
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      # Downloads a copy of the code in your repository before running CI tests
+      - name: Check out repository code
+        # The uses keyword specifies that this step will run v3 of the actions/checkout action.
+        # This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code (such as build and test tools).
+        # You should use the checkout action any time your workflow will run against the repository's code.
+        uses: actions/checkout@v3
+
+        # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
+      - name: Install the Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      # A GitHub Action that implements smart caching for rust/cargo projects with sensible defaults.
+      - name: Rust Cache Action
+        uses: Swatinem/rust-cache@v2
         with:
           key: sqlx-${{ env.SQLX_VERSION }}
       - name: Install sqlx-cli
         run:
-            cargo install sqlx-cli
-            --version=${{ env.SQLX_VERSION }}
-            --features ${{ env.SQLX_FEATURES }}
-            --no-default-features
-            --locked
+          cargo install sqlx-cli
+          --version=${{ env.SQLX_VERSION }}
+          --features ${{ env.SQLX_FEATURES }}
+          --no-default-features
+          --locked
+          # The --locked flag can be used to force Cargo to use the packaged Cargo.lock file if it is available.
+          # This may be useful for ensuring reproducible builds, to use the exact same set of dependencies that were available when the package was published.
+          # It may also be useful if a newer version of a dependency is published that no longer builds on your system, or has other problems
+      - name: Install postgresql-client
+        run: sudo apt-get update && sudo apt-get install postgresql-client -y
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
@@ -89,12 +106,13 @@ jobs:
         with:
           key: sqlx-${{ env.SQLX_VERSION }}
       - name: Install sqlx-cli
-        run:
-          cargo install sqlx-cli
-            --version=${{ env.SQLX_VERSION }}
-            --features ${{ env.SQLX_FEATURES }}
-            --no-default-features
-            --locked
+        run: cargo install sqlx-cli
+          --version=${{ env.SQLX_VERSION }}
+          --features ${{ env.SQLX_FEATURES }}
+          --no-default-features
+          --locked
+      - name: Install postgresql-client
+        run: sudo apt-get update && sudo apt-get install postgresql-client -y
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
@@ -130,8 +148,7 @@ jobs:
       - name: Install tarpaulin
         run: cargo install cargo-tarpaulin
       - name: Install sqlx-cli
-        run:
-          cargo install sqlx-cli
+        run: cargo install sqlx-cli
           --version=${{ env.SQLX_VERSION }}
           --features ${{ env.SQLX_FEATURES }}
           --no-default-features
