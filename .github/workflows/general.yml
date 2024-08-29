@@ -10,13 +10,13 @@ on:
     branches:
       - root-chapter-03-part1
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
     branches:
       - root-chapter-03-part1
 
 env:
   CARGO_TERM_COLOR: always
-  SQLX_VERSION: 0.7.1
+  SQLX_VERSION: 0.8.0
   SQLX_FEATURES: "rustls,postgres"
 
 # A workflow run is made up of one or more jobs, which run in parallel by default
@@ -32,7 +32,7 @@ jobs:
     services:
       # Label used to access the service container
       postgres:
-        # Docker Hub image 
+        # Docker Hub image
         image: postgres:14
         # Environment variables scoped only for the `postgres` element
         env:
@@ -44,14 +44,14 @@ jobs:
         ports:
           - 5432:5432
     steps:
-        # Downloads a copy of the code in your repository before running CI tests
+      # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        # The uses keyword specifies that this step will run v3 of the actions/checkout action. 
+        # The uses keyword specifies that this step will run v3 of the actions/checkout action.
         # This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code (such as build and test tools).
         # You should use the checkout action any time your workflow will run against the repository's code.
         uses: actions/checkout@v3
 
-       # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
+        # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
       - name: Install the Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
@@ -64,14 +64,14 @@ jobs:
 
       - name: Install sqlx-cli
         run:
-            cargo install sqlx-cli
-            --version=${{ env.SQLX_VERSION }}
-            --features ${{ env.SQLX_FEATURES }}
-            --no-default-features
-            --locked
-            # The --locked flag can be used to force Cargo to use the packaged Cargo.lock file if it is available. 
-            # This may be useful for ensuring reproducible builds, to use the exact same set of dependencies that were available when the package was published. 
-            # It may also be useful if a newer version of a dependency is published that no longer builds on your system, or has other problems
+          cargo install sqlx-cli
+          --version=${{ env.SQLX_VERSION }}
+          --features ${{ env.SQLX_FEATURES }}
+          --no-default-features
+          --locked
+          # The --locked flag can be used to force Cargo to use the packaged Cargo.lock file if it is available.
+          # This may be useful for ensuring reproducible builds, to use the exact same set of dependencies that were available when the package was published.
+          # It may also be useful if a newer version of a dependency is published that no longer builds on your system, or has other problems
 
       - name: Install postgresql-client
         run: sudo apt-get update && sudo apt-get install postgresql-client -y
@@ -117,12 +117,11 @@ jobs:
         with:
           key: sqlx-${{ env.SQLX_VERSION }}
       - name: Install sqlx-cli
-        run:
-          cargo install sqlx-cli
-            --version=${{ env.SQLX_VERSION }}
-            --features ${{ env.SQLX_FEATURES }}
-            --no-default-features
-            --locked
+        run: cargo install sqlx-cli
+          --version=${{ env.SQLX_VERSION }}
+          --features ${{ env.SQLX_FEATURES }}
+          --no-default-features
+          --locked
       - name: Install postgresql-client
         run: sudo apt-get update && sudo apt-get install postgresql-client -y
       - name: Migrate database
@@ -153,8 +152,7 @@ jobs:
         with:
           key: sqlx-${{ env.SQLX_VERSION }}
       - name: Install sqlx-cli
-        run:
-          cargo install sqlx-cli
+        run: cargo install sqlx-cli
           --version=${{ env.SQLX_VERSION }}
           --features ${{ env.SQLX_FEATURES }}
           --no-default-features
