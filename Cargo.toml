@@ -52,9 +52,9 @@ actix-session = { version = "0.10", features = ["redis-session-rustls"] }
 serde_json = "1"
 
 [dev-dependencies]
-quickcheck = "0.9.2"
-quickcheck_macros = "0.9.1"
-fake = "~2.3.0"
+quickcheck = "1.0.3"
+quickcheck_macros = "1"
+fake = "2.9"
 wiremock = "0.6"
 serde_json = "1.0.61"
 linkify = "0.10"
