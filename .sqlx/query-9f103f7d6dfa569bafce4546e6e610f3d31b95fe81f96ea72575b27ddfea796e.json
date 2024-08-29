@@ -13,7 +13,7 @@
         "name": "response_headers!: Vec<HeaderPairRecord>",
         "type_info": {
           "Custom": {
-            "name": "_header_pair",
+            "name": "header_pair[]",
             "kind": {
               "Array": {
                 "Custom": {
