@@ -3054,7 +3054,6 @@ dependencies = [
  "claims",
  "config",
  "log",
- "once_cell",
  "reqwest",
  "secrecy",
  "serde",
