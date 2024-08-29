@@ -1,7 +1,7 @@
 use argon2::password_hash::SaltString;
 use argon2::{Algorithm, Argon2, Params, PasswordHasher, Version};
-use once_cell::sync::Lazy;
 use sqlx::{Connection, Executor, PgConnection, PgPool};
+use std::sync::LazyLock;
 use uuid::Uuid;
 use wiremock::MockServer;
 use zero2prod::configuration::{get_configuration, DatabaseSettings};
@@ -9,7 +9,7 @@ use zero2prod::startup::{get_connection_pool, Application};
 use zero2prod::telemetry::{get_subscriber, init_subscriber};
 
 // Ensure that the `tracing` stack is only initialised once using `once_cell`
-static TRACING: Lazy<()> = Lazy::new(|| {
+static TRACING: LazyLock<()> = LazyLock::new(|| {
     let default_filter_level = "info".to_string();
     let subscriber_name = "test".to_string();
     if std::env::var("TEST_LOG").is_ok() {
@@ -164,7 +164,7 @@ impl TestApp {
 }
 
 pub async fn spawn_app() -> TestApp {
-    Lazy::force(&TRACING);
+    LazyLock::force(&TRACING);
 
     // Launch a mock server to stand in for Postmark's API
     let email_server = MockServer::start().await;
