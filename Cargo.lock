@@ -3349,7 +3349,6 @@ dependencies = [
  "config",
  "fake",
  "log",
- "once_cell",
  "quickcheck",
  "quickcheck_macros",
  "reqwest",
