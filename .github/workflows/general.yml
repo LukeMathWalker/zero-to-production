@@ -28,7 +28,7 @@ jobs:
     name: Test
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
-    # Service containers to run with the `test` container job
+    # Service containers to run alongside the `test` container job
     services:
       # Label used to access the service container
       postgres:
@@ -55,22 +55,21 @@ jobs:
       # It also takes care of caching intermediate build artifacts.
       - name: Install the Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
+
       - name: Install sqlx-cli
-        run:
-          cargo install sqlx-cli
+        run: cargo install sqlx-cli
           --version=${{ env.SQLX_VERSION }}
           --features ${{ env.SQLX_FEATURES }}
           --no-default-features
           --locked
-          # The --locked flag can be used to force Cargo to use the packaged Cargo.lock file if it is available.
-          # This may be useful for ensuring reproducible builds, to use the exact same set of dependencies that were available when the package was published.
-          # It may also be useful if a newer version of a dependency is published that no longer builds on your system, or has other problems
-
       - name: Migrate database
         run: SKIP_DOCKER=true ./scripts/init_db.sh
 
       - name: Run tests
         run: cargo test
+
+      - name: Check that queries are fresh
+        run: cargo sqlx prepare --workspace --check -- --all-targets
 
   # `fmt` container job
   fmt:
@@ -89,29 +88,20 @@ jobs:
   clippy:
     name: Clippy
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:14
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
+    env:
+      # This environment variable forces sqlx to use its offline mode,
+      # which means that it will not attempt to connect to a database
+      # when running the tests. It'll instead use the cached query results.
+      # We check that the cached query results are up-to-date in another job,
+      # to speed up the overall CI pipeline.
+      # This will all be covered in detail in chapter 5.
+      SQLX_OFFLINE: true
     steps:
       - uses: actions/checkout@v4
       - name: Install the Rust toolchain
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: clippy
-      - name: Install sqlx-cli
-        run: cargo install sqlx-cli
-          --version=${{ env.SQLX_VERSION }}
-          --features ${{ env.SQLX_FEATURES }}
-          --no-default-features
-          --locked
-      - name: Migrate database
-        run: SKIP_DOCKER=true ./scripts/init_db.sh
       - name: Linting
         run: cargo clippy -- -D warnings
 
