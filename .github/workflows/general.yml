@@ -38,20 +38,15 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        # The uses keyword specifies that this step will run v3 of the actions/checkout action.
+        # The uses keyword specifies that this step will run v4 of the actions/checkout action.
         # This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code (such as build and test tools).
         # You should use the checkout action any time your workflow will run against the repository's code.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-        # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
+      # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
+      # It also takes care of caching intermediate build artifacts.
       - name: Install the Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      # A GitHub Action that implements smart caching for rust/cargo projects with sensible defaults.
-      - name: Rust Cache Action
-        uses: Swatinem/rust-cache@v2
-        with:
-          key: sqlx-${{ env.SQLX_VERSION }}
+        uses: actions-rust-lang/setup-rust-toolchain@v1
       - name: Install sqlx-cli
         run:
           cargo install sqlx-cli
@@ -76,8 +71,9 @@ jobs:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: rustfmt
       - name: Enforce formatting
@@ -96,13 +92,11 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: clippy
-      - uses: Swatinem/rust-cache@v2
-        with:
-          key: sqlx-${{ env.SQLX_VERSION }}
       - name: Install sqlx-cli
         run: cargo install sqlx-cli
           --version=${{ env.SQLX_VERSION }}
@@ -133,14 +127,11 @@ jobs:
         ports:
           - 6379:6379
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          key: sqlx-${{ env.SQLX_VERSION }}
-      - name: Install tarpaulin
-        run: cargo install cargo-tarpaulin
+          components: llvm-tools-preview
       - name: Install sqlx-cli
         run: cargo install sqlx-cli
           --version=${{ env.SQLX_VERSION }}
@@ -149,5 +140,13 @@ jobs:
           --locked
       - name: Migrate database
         run: SKIP_DOCKER=true ./scripts/init_db.sh
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
       - name: Generate code coverage
-        run: cargo tarpaulin --verbose --workspace
+        run: cargo llvm-cov --all-features --workspace --lcov --output-path lcov.info
+      - name: Generate report
+        run: cargo llvm-cov report --html --output-dir coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: "Coverage report"
+          path: coverage/
