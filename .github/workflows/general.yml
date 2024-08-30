@@ -10,7 +10,7 @@ on:
     branches:
       - root-chapter-03-part0
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
     branches:
       - root-chapter-03-part0
 
@@ -20,27 +20,24 @@ env:
 # A workflow run is made up of one or more jobs, which run in parallel by default
 # Each job runs in a runner environment specified by runs-on
 jobs:
-# Unique identifier of our job (`job_id`)
+  # Unique identifier of our job (`job_id`)
   test:
     # Sets the name `Test` for the job, which is displayed in the GitHub UI
     name: Test
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
     steps:
-        # Downloads a copy of the code in your repository before running CI tests
+      # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        # The uses keyword specifies that this step will run v3 of the actions/checkout action. 
-        # This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code (such as build and test tools). 
+        # The uses keyword specifies that this step will run v4 of the actions/checkout action.
+        # This is an action that checks out your repository onto the runner, allowing you to run scripts or other actions against your code (such as build and test tools).
         # You should use the checkout action any time your workflow will run against the repository's code.
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # This GitHub Action installs a Rust toolchain using rustup. It is designed for one-line concise usage and good defaults.
+      # It also takes care of caching intermediate build artifacts.
       - name: Install the Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      # A GitHub Action that implements smart caching for rust/cargo projects with sensible defaults.
-      - name: Rust Cache Action
-        uses: Swatinem/rust-cache@v2
+        uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: Run tests
         run: cargo test
@@ -50,10 +47,10 @@ jobs:
     name: Rustfmt
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          # Specific to dtolnay/rust-toolchain: Comma-separated string of additional components to install
           components: rustfmt
       - name: Enforce formatting
         run: cargo fmt --check
@@ -62,11 +59,11 @@ jobs:
     name: Clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
           components: clippy
-      - uses: Swatinem/rust-cache@v2
       - name: Linting
         run: cargo clippy -- -D warnings
 
@@ -74,12 +71,19 @@ jobs:
   coverage:
     name: Code coverage
     runs-on: ubuntu-latest
-    container:
-      image: xd009642/tarpaulin
-      options: --security-opt seccomp=unconfined
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install the Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: llvm-tools-preview
+      - name: Install cargo-llvm-cov
+        uses: taiki-e/install-action@cargo-llvm-cov
       - name: Generate code coverage
-        run: |
-          cargo tarpaulin --verbose --workspace
+        run: cargo llvm-cov --all-features --workspace --lcov --output-path lcov.info
+      - name: Generate report
+        run: cargo llvm-cov report --html --output-dir coverage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: "Coverage report"
+          path: coverage/
