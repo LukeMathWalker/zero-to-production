@@ -6,7 +6,7 @@ pub struct Settings {
     pub application_port: u16,
 }
 
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Clone)]
 pub struct DatabaseSettings {
     pub username: String,
     pub password: Secret<String>,
@@ -24,16 +24,6 @@ impl DatabaseSettings {
             self.host,
             self.port,
             self.database_name
-        ))
-    }
-
-    pub fn connection_string_without_db(&self) -> Secret<String> {
-        Secret::new(format!(
-            "postgres://{}:{}@{}:{}",
-            self.username,
-            self.password.expose_secret(),
-            self.host,
-            self.port
         ))
     }
 }
