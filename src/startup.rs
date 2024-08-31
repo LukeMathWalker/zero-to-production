@@ -73,7 +73,7 @@ impl Application {
 
 pub async fn get_connection_pool(configuration: &DatabaseSettings) -> Result<PgPool, sqlx::Error> {
     PgPoolOptions::new()
-        .connect_with(configuration.with_db())
+        .connect_with(configuration.connect_options())
         .await
 }
 
