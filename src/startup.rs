@@ -50,7 +50,7 @@ impl Application {
 }
 
 pub fn get_connection_pool(configuration: &DatabaseSettings) -> PgPool {
-    PgPoolOptions::new().connect_lazy_with(configuration.with_db())
+    PgPoolOptions::new().connect_lazy_with(configuration.connect_options())
 }
 
 fn run(
