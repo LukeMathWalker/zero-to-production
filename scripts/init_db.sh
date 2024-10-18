@@ -40,7 +40,7 @@ then
       --publish "${DB_PORT}":5432 \
       --detach \
       --name "${CONTAINER_NAME}" \
-      postgres -N 1000
+      postgres:17-alpine -N 1000
       # ^ Increased maximum number of connections for testing purposes
       
   until [ \

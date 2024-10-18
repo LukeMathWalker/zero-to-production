@@ -14,7 +14,7 @@ use actix_web::web::Data;
 use actix_web::{web, App, HttpServer};
 use actix_web_flash_messages::storage::CookieMessageStore;
 use actix_web_flash_messages::FlashMessagesFramework;
-use secrecy::{ExposeSecret, Secret};
+use secrecy::{ExposeSecret, SecretString};
 use sqlx::postgres::PgPoolOptions;
 use sqlx::PgPool;
 use std::net::TcpListener;
@@ -69,8 +69,8 @@ async fn run(
     db_pool: PgPool,
     email_client: EmailClient,
     base_url: String,
-    hmac_secret: Secret<String>,
-    redis_uri: Secret<String>,
+    hmac_secret: SecretString,
+    redis_uri: SecretString,
 ) -> Result<Server, anyhow::Error> {
     let db_pool = Data::new(db_pool);
     let email_client = Data::new(email_client);
@@ -115,4 +115,4 @@ async fn run(
 }
 
 #[derive(Clone)]
-pub struct HmacSecret(pub Secret<String>);
+pub struct HmacSecret(pub SecretString);

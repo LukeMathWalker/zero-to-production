@@ -1,6 +1,6 @@
 use argon2::password_hash::SaltString;
 use argon2::{Algorithm, Argon2, Params, PasswordHasher, Version};
-use secrecy::Secret;
+use secrecy::SecretString;
 use sqlx::{Connection, Executor, PgConnection, PgPool};
 use std::sync::LazyLock;
 use uuid::Uuid;
@@ -55,7 +55,7 @@ impl TestApp {
 
     pub async fn post_subscriptions(&self, body: String) -> reqwest::Response {
         self.api_client
-            .post(&format!("{}/subscriptions", &self.address))
+            .post(format!("{}/subscriptions", &self.address))
             .header("Content-Type", "application/x-www-form-urlencoded")
             .body(body)
             .send()
@@ -68,7 +68,7 @@ impl TestApp {
         Body: serde::Serialize,
     {
         self.api_client
-            .post(&format!("{}/login", &self.address))
+            .post(format!("{}/login", &self.address))
             .form(body)
             .send()
             .await
@@ -77,7 +77,7 @@ impl TestApp {
 
     pub async fn get_login_html(&self) -> String {
         self.api_client
-            .get(&format!("{}/login", &self.address))
+            .get(format!("{}/login", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
@@ -88,7 +88,7 @@ impl TestApp {
 
     pub async fn get_admin_dashboard(&self) -> reqwest::Response {
         self.api_client
-            .get(&format!("{}/admin/dashboard", &self.address))
+            .get(format!("{}/admin/dashboard", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
@@ -100,7 +100,7 @@ impl TestApp {
 
     pub async fn get_change_password(&self) -> reqwest::Response {
         self.api_client
-            .get(&format!("{}/admin/password", &self.address))
+            .get(format!("{}/admin/password", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
@@ -112,7 +112,7 @@ impl TestApp {
 
     pub async fn post_logout(&self) -> reqwest::Response {
         self.api_client
-            .post(&format!("{}/admin/logout", &self.address))
+            .post(format!("{}/admin/logout", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
@@ -123,7 +123,7 @@ impl TestApp {
         Body: serde::Serialize,
     {
         self.api_client
-            .post(&format!("{}/admin/password", &self.address))
+            .post(format!("{}/admin/password", &self.address))
             .form(body)
             .send()
             .await
@@ -132,7 +132,7 @@ impl TestApp {
 
     pub async fn get_publish_newsletter(&self) -> reqwest::Response {
         self.api_client
-            .get(&format!("{}/admin/newsletters", &self.address))
+            .get(format!("{}/admin/newsletters", &self.address))
             .send()
             .await
             .expect("Failed to execute request.")
@@ -147,7 +147,7 @@ impl TestApp {
         Body: serde::Serialize,
     {
         self.api_client
-            .post(&format!("{}/admin/newsletters", &self.address))
+            .post(format!("{}/admin/newsletters", &self.address))
             .form(body)
             .send()
             .await
@@ -233,7 +233,7 @@ async fn configure_database(config: &DatabaseSettings) -> PgPool {
     let maintenance_settings = DatabaseSettings {
         database_name: "postgres".to_string(),
         username: "postgres".to_string(),
-        password: Secret::new("password".to_string()),
+        password: SecretString::from("password"),
         ..config.clone()
     };
     let mut connection = PgConnection::connect_with(&maintenance_settings.connect_options())

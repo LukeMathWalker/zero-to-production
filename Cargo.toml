@@ -13,11 +13,11 @@ path = "src/main.rs"
 name = "zero2prod"
 
 [dependencies]
-actix-web = "4"
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-serde = "1.0.115"
-config = { version = "0.14", default-features = false, features = ["yaml"] }
-sqlx = { version = "0.8", default-features = false, features = [
+actix-web = "4.9.0"
+tokio = { version = "1.40.0", features = ["macros", "rt-multi-thread"] }
+serde = "1.0.210"
+config = { version = "0.14.0", default-features = false, features = ["yaml"] }
+sqlx = { version = "0.8.2", default-features = false, features = [
     "runtime-tokio-rustls",
     "macros",
     "postgres",
@@ -25,38 +25,38 @@ sqlx = { version = "0.8", default-features = false, features = [
     "chrono",
     "migrate",
 ] }
-uuid = { version = "1", features = ["v4", "serde"] }
-chrono = { version = "0.4.22", default-features = false, features = ["clock"] }
-reqwest = { version = "0.12", default-features = false, features = [
+uuid = { version = "1.11.0", features = ["v4", "serde"] }
+chrono = { version = "0.4.38", default-features = false, features = ["clock"] }
+reqwest = { version = "0.12.8", default-features = false, features = [
     "json",
     "rustls-tls",
     "cookies",
 ] }
-log = "0.4"
-tracing = "0.1.19"
-tracing-subscriber = { version = "0.3", features = ["registry", "env-filter"] }
-tracing-bunyan-formatter = "0.3.1"
-thiserror = "1.0.24"
-serde-aux = "4"
-unicode-segmentation = "1.7.1"
-rand = { version = "0.8", features = ["std_rng"] }
-anyhow = "1.0.40"
-base64 = "0.22.0"
-argon2 = { version = "0.5", features = ["std"] }
-validator = "0.18"
+log = "0.4.22"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["registry", "env-filter"] }
+tracing-bunyan-formatter = "0.3.9"
+thiserror = "1.0.64"
+serde-aux = "4.5.0"
+unicode-segmentation = "1.12.0"
+rand = { version = "0.8.5", features = ["std_rng"] }
+anyhow = "1.0.89"
+base64 = "0.22.1"
+argon2 = { version = "0.5.3", features = ["std"] }
+validator = "0.18.1"
 tracing-log = "0.2.0"
-tracing-actix-web = "0.7"
-secrecy = { version = "0.8", features = ["serde"] }
-actix-web-flash-messages = { version = "0.5", features = ["cookies"] }
-actix-session = { version = "0.10", features = ["redis-session-rustls"] }
-serde_json = "1"
+tracing-actix-web = "0.7.13"
+secrecy = { version = "0.10.3", features = ["serde"] }
+actix-web-flash-messages = { version = "0.5.0", features = ["cookies"] }
+actix-session = { version = "0.10.1", features = ["redis-session-rustls"] }
+serde_json = "1.0.129"
 
 [dev-dependencies]
 quickcheck = "1.0.3"
-quickcheck_macros = "1"
-fake = "2.9"
-wiremock = "0.6"
-serde_json = "1.0.61"
+quickcheck_macros = "1.0.0"
+fake = "2.10.0"
+wiremock = "0.6.2"
+serde_json = "1.0.129"
 serde_urlencoded = "0.7.1"
 linkify = "0.10"
-claims = "0.7"
+claims = "0.7.1"
