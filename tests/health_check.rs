@@ -43,6 +43,12 @@ pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
         .await
         .expect("Failed to create database.");
 
+    //In current version of Postgres we need to give the app user ownership of the database to access it.
+    connection
+        .execute(format!(r#"ALTER DATABASE "{}" OWNER TO "{}";"#, config.database_name, config.username).as_str())
+        .await
+        .expect("Failed to change ownership.");
+
     // Migrate database
     let connection_pool = PgPool::connect(&config.connection_string())
         .await
